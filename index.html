@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>이더라운드 레퍼럴 프로모션 2026</title>
+<meta name="description" content="지인에게 이더라운드를 추천하고 제주 여행 혜택을 받아보세요." />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --green:#2C5A3F;        /* 브랜드 메인 그린 */
+    --green-dark:#1F4634;
+    --green-deep:#16382A;
+    --green-mid:#4A8062;
+    --green-soft:#E9F1EB;
+    --green-tint:#F0F5F1;
+    --sand:#F6F2E9;         /* 따뜻한 페이지 배경 */
+    --card:#FFFFFF;
+    --ink:#21271F;
+    --muted:#717A6E;
+    --line:#E9E4D8;
+    --gold:#C7A14A;
+    --silver:#A9AEA6;
+    --bronze:#BF895C;
+    --danger:#C2543F;
+    --shadow:0 10px 30px rgba(31,70,52,.08);
+    --shadow-sm:0 4px 14px rgba(31,70,52,.06);
+    --radius:22px;
+    --radius-sm:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    background:var(--sand);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;border:none;}
+  input{font-family:inherit;}
+
+  /* ===== 상단바 ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-inner{
+    max-width:520px;margin:0 auto;padding:13px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:7px;font-weight:800;font-size:19px;color:var(--green-deep);letter-spacing:-.03em;}
+  .logo .dot{color:var(--green-mid);}
+  .logo svg{display:block;}
+  .dday{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--green);color:#fff;font-weight:700;font-size:13px;
+    padding:6px 12px;border-radius:999px;
+  }
+  .dday b{font-variant-numeric:tabular-nums;}
+
+  /* ===== 레이아웃 ===== */
+  main{max-width:520px;margin:0 auto;padding:16px 16px 60px;}
+  section{margin-top:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);}
+  .pad{padding:22px;}
+  .sec-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--green-mid);margin:0 0 4px;letter-spacing:.02em;}
+  .sec-title{font-size:20px;font-weight:800;margin:0 0 16px;letter-spacing:-.02em;}
+  .sec-title .sub{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:5px;letter-spacing:0;}
+
+  /* ===== 히어로 ===== */
+  .hero{
+    position:relative;overflow:hidden;border-radius:var(--radius);
+    background:linear-gradient(160deg,#2C5A3F 0%,#1F4634 62%,#163A2B 100%);
+    color:#fff;padding:34px 24px 30px;box-shadow:var(--shadow);
+  }
+  .hero .blob{
+    position:absolute;right:-46px;top:-46px;width:190px;height:190px;
+    background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
+    border-radius:50%;
+  }
+  .hero .oreum{position:absolute;left:0;right:0;bottom:-2px;width:100%;opacity:.5;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;
+    letter-spacing:.02em;backdrop-filter:blur(4px);
+  }
+  .hero h1{
+    position:relative;font-size:27px;line-height:1.32;font-weight:800;
+    margin:16px 0 10px;letter-spacing:-.03em;
+  }
+  .hero h1 .hl{color:#CFE6D5;}
+  .hero p{position:relative;font-size:14.5px;color:rgba(255,255,255,.86);margin:0;max-width:30ch;}
+  .hero .stat-row{position:relative;display:flex;gap:10px;margin-top:20px;}
+  .hero .stat{
+    flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
+    border-radius:var(--radius-sm);padding:12px 13px;backdrop-filter:blur(4px);
+  }
+  .hero .stat .n{font-size:18px;font-weight:800;letter-spacing:-.02em;}
+  .hero .stat .l{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:2px;}
+
+  /* ===== 내 추천 링크 카드 ===== */
+  .ref .field{margin-bottom:12px;}
+  .ref label{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:var(--ink);}
+  .ref input{
+    width:100%;padding:14px 15px;font-size:15px;color:var(--ink);
+    background:#FAFBFA;border:1.5px solid var(--line);border-radius:var(--radius-sm);
+    transition:border-color .15s,background .15s;outline:none;
+  }
+  .ref input:focus{border-color:var(--green-mid);background:#fff;}
+  .ref input.err{border-color:var(--danger);background:#FCF4F2;}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px;}
+  .hint.err{color:var(--danger);}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+    padding:15px;border-radius:var(--radius-sm);font-size:15.5px;font-weight:800;
+    background:var(--green);color:#fff;transition:transform .06s,background .15s;
+  }
+  .btn:active{transform:scale(.985);}
+  .btn:hover{background:var(--green-dark);}
+  .btn.secondary{background:var(--green-soft);color:var(--green-dark);}
+  .btn.secondary:hover{background:#DEEAE0;}
+  .btn.kakao{background:#FAE100;color:#3A1D1D;}
+  .btn.kakao:hover{background:#F2D900;}
+  .btn:disabled{background:#CFD6D0;color:#fff;cursor:not-allowed;}
+  .btn:disabled:hover{background:#CFD6D0;}
+  .btn:disabled:active{transform:none;}
+
+  /* 동의 체크박스 */
+  .consent{display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:14px 2px 14px;user-select:none;}
+  .consent input{position:absolute;opacity:0;width:0;height:0;}
+  .consent .box{flex:none;width:22px;height:22px;border:1.5px solid #C9D3CC;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;margin-top:1px;}
+  .consent .box::after{content:"";width:10px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) scale(0);transition:transform .15s;margin-top:-2px;}
+  .consent input:checked + .box{background:var(--green);border-color:var(--green);}
+  .consent input:checked + .box::after{transform:rotate(-45deg) scale(1);}
+  .consent input:focus-visible + .box{box-shadow:0 0 0 3px rgba(44,90,63,.18);}
+  .consent .ctxt{font-size:13px;color:var(--ink);line-height:1.45;padding-top:1px;}
+  .consent .ctxt b{color:var(--green);font-weight:800;}
+  .consent .cmore{color:var(--muted);font-size:12px;}
+
+  /* 결과 상태 */
+  .result{display:none;}
+  .result.show{display:block;animation:rise .35s ease;}
+  @keyframes rise{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .greet{font-size:15px;font-weight:700;margin:0 0 4px;}
+  .greet b{color:var(--green);}
+  .greet-sub{font-size:13px;color:var(--muted);margin:0 0 16px;}
+  .linkbox{
+    display:flex;align-items:center;gap:10px;
+    background:var(--green-tint);border:1.5px dashed #Bcd;border-color:#C3D8C9;
+    border-radius:var(--radius-sm);padding:13px 15px;margin-bottom:12px;
+  }
+  .linkbox .url{flex:1;min-width:0;font-size:13.5px;font-weight:600;color:var(--green-dark);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .copybtn{
+    flex:none;background:var(--green);color:#fff;font-size:13px;font-weight:700;
+    padding:9px 14px;border-radius:10px;transition:background .15s,transform .06s;
+  }
+  .copybtn:active{transform:scale(.95);}
+  .copybtn:hover{background:var(--green-dark);}
+  .mystats{display:flex;gap:10px;margin:14px 0 4px;}
+  .mystat{flex:1;background:#FAFBFA;border:1px solid var(--line);border-radius:var(--radius-sm);padding:13px;text-align:center;}
+  .mystat .n{font-size:20px;font-weight:800;color:var(--green);letter-spacing:-.02em;}
+  .mystat .l{font-size:12px;color:var(--muted);margin-top:3px;}
+  .reset{display:block;width:100%;text-align:center;background:none;color:var(--muted);font-size:12.5px;padding:12px 0 2px;text-decoration:underline;text-underline-offset:2px;}
+
+  /* ===== 리더보드 ===== */
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--green-mid);}
+  .live .ping{width:7px;height:7px;border-radius:50%;background:#3Fae6a;box-shadow:0 0 0 0 rgba(63,174,106,.5);animation:ping 1.6s infinite;}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(63,174,106,.45);}70%{box-shadow:0 0 0 7px rgba(63,174,106,0);}100%{box-shadow:0 0 0 0 rgba(63,174,106,0);}}
+  .row{display:flex;align-items:center;gap:13px;padding:13px 6px;border-bottom:1px solid #F2EFE7;}
+  .row:last-child{border-bottom:none;}
+  .rank{flex:none;width:30px;text-align:center;font-size:16px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .rank.medal{font-size:20px;}
+  .who{flex:1;min-width:0;}
+  .who .nick{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .who .tag{font-size:11.5px;color:var(--muted);}
+  .cnt{flex:none;font-size:15px;font-weight:800;color:var(--green-dark);font-variant-numeric:tabular-nums;}
+  .cnt span{font-size:12px;font-weight:600;color:var(--muted);margin-left:2px;}
+  .row.me{background:linear-gradient(90deg,var(--green-soft),#fff);border-radius:12px;border-bottom:none;margin:4px 0;padding:13px 10px;box-shadow:inset 0 0 0 1.5px #CFE2D5;}
+  .row.me .nick{color:var(--green-dark);}
+  .cut{display:flex;align-items:center;gap:10px;margin:14px 2px 6px;color:var(--green-mid);font-size:12px;font-weight:700;}
+  .cut::before,.cut::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,#CBD8CD 0 6px,transparent 6px 11px);}
+
+  /* ===== 혜택 ===== */
+  .prize{display:flex;align-items:center;gap:14px;padding:13px 4px;border-bottom:1px solid #F2EFE7;}
+  .prize:last-child{border-bottom:none;}
+  .medal-ic{flex:none;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;}
+  .m1{background:linear-gradient(135deg,#D8B85C,#Bc8f34);}
+  .m2{background:linear-gradient(135deg,#B9BEB6,#969C92);}
+  .m3{background:linear-gradient(135deg,#Cd9a6f,#B07748);}
+  .m4{background:var(--green-soft);color:var(--green-dark);}
+  .m5{background:var(--green-soft);color:var(--green-dark);}
+  .draw{background:#F3ECDD;color:#9A7B3C;}
+  .prize .info{flex:1;min-width:0;}
+  .prize .info .t{font-size:14.5px;font-weight:700;}
+  .prize .info .r{font-size:12px;color:var(--muted);margin-top:1px;}
+  .prize .ppl{flex:none;font-size:12.5px;font-weight:700;color:var(--green-mid);}
+  .allreward{
+    margin-top:16px;display:flex;align-items:center;gap:14px;
+    background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;
+    border-radius:var(--radius-sm);padding:16px 18px;
+  }
+  .allreward .em{font-size:26px;}
+  .allreward .t{font-size:14.5px;font-weight:800;}
+  .allreward .d{font-size:12.5px;color:rgba(255,255,255,.82);margin-top:2px;}
+
+  /* ===== 참여방법 ===== */
+  .step{display:flex;gap:14px;padding:11px 2px;}
+  .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .step .tx{font-size:14.5px;font-weight:600;padding-top:4px;}
+  .step .tx b{font-weight:800;color:var(--green-dark);}
+
+  /* ===== 유의사항 ===== */
+  .notice{padding:4px 8px;}
+  .notice h3{font-size:13px;font-weight:700;color:var(--muted);margin:0 0 10px;}
+  .notice ul{margin:0;padding-left:17px;}
+  .notice li{font-size:12.5px;color:var(--muted);margin-bottom:7px;line-height:1.55;}
+
+  /* ===== 푸터 ===== */
+  footer{text-align:center;padding:26px 16px 10px;color:var(--muted);font-size:12px;}
+  footer .fl{font-weight:800;color:var(--green-deep);font-size:15px;margin-bottom:6px;letter-spacing:-.02em;}
+
+  /* ===== 토스트 ===== */
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:var(--green-deep);color:#fff;font-size:13.5px;font-weight:600;
+    padding:13px 20px;border-radius:999px;box-shadow:0 12px 30px rgba(0,0,0,.2);
+    opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100;
+    display:flex;align-items:center;gap:8px;max-width:90vw;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:380px){
+    .hero h1{font-size:24px;}
+    .pad{padding:18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 상단바 -->
+<header class="topbar">
+  <div class="bar-inner">
+    <div class="logo">
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none"><path d="M2 18C4.5 9 7.5 4 10 4c2.2 0 3.6 3.4 5 7.5C21 18 22.5 18 24 18H2Z" fill="#2C5A3F"/><circle cx="18.5" cy="6.5" r="2.4" fill="#4A8062"/></svg>
+      <span>eat<span class="dot">.</span>around</span>
+    </div>
+    <span class="dday">🎁 마감 <b id="dday">D-45</b></span>
+  </div>
+</header>
+
+<main>
+
+  <!-- 히어로 -->
+  <section class="hero">
+    <span class="blob"></span>
+    <svg class="oreum" viewBox="0 0 520 90" preserveAspectRatio="none"><path d="M0 90 C60 50 110 36 170 56 C220 72 250 30 320 44 C390 58 430 34 520 62 L520 90 Z" fill="#16382A"/></svg>
+    <span class="hero-badge">🌿 레퍼럴 프로모션 2026</span>
+    <h1>추천할수록 가까워지는<br><span class="hl">제주 여행 혜택</span></h1>
+    <p>내 추천 링크로 지인이 이더라운드를 만나면, 순위가 올라가고 혜택이 따라와요.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="n" id="hStat1">312</div><div class="l">지금까지 모인 추천</div></div>
+      <div class="stat"><div class="n">15<span style="font-size:13px">명</span></div><div class="l">혜택 받는 인원</div></div>
+      <div class="stat"><div class="n">2주</div><div class="l">진행 기간</div></div>
+    </div>
+  </section>
+
+  <!-- 혜택 -->
+  <section class="card benefits">
+    <div class="pad">
+      <p class="sec-label">🎁 REWARD</p>
+      <h2 class="sec-title">순위 혜택<span class="sub">2주 종료 후 순위에 따라 지급돼요.</span></h2>
+      <div class="prize"><div class="medal-ic m1">1</div><div class="info"><div class="t">제주 프리미엄 숙박권 1박</div><div class="r">1등</div></div><div class="ppl">1명</div></div>
+      <div class="prize"><div class="medal-ic m2">2</div><div class="info"><div class="t">제주 스파·마사지 이용권</div><div class="r">2등</div></div><div class="ppl">1명</div></div>
+      <div class="prize"><div class="medal-ic m3">3</div><div class="info"><div class="t">호텔 애프터눈티 이용권</div><div class="r">3등</div></div><div class="ppl">1명</div></div>
+      <div class="prize"><div class="medal-ic m4">4·5</div><div class="info"><div class="t">제주 향수·캔들 만들기 체험권</div><div class="r">4~5등</div></div><div class="ppl">2명</div></div>
+      <div class="prize"><div class="medal-ic m5">6~</div><div class="info"><div class="t">제주 로컬 카페 이용권</div><div class="r">6~10등</div></div><div class="ppl">5명</div></div>
+      <div class="prize"><div class="medal-ic draw">🎲</div><div class="info"><div class="t">제주 특산품 선물세트</div><div class="r">추첨</div></div><div class="ppl">5명</div></div>
+
+      <div class="allreward">
+        <span class="em">🗺️</span>
+        <div><div class="t">참여자 전원, 제주 로컬 맛집 지도</div><div class="d">링크를 만든 모든 분께 PDF로 드려요.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 내 추천 링크 -->
+  <section class="card ref">
+    <div class="pad">
+      <!-- 입력 상태 -->
+      <div class="form" id="refForm">
+        <p class="sec-label">STEP 1</p>
+        <h2 class="sec-title">내 추천 링크 만들기<span class="sub">닉네임과 연락처를 남기면 나만의 링크가 생성돼요.</span></h2>
+        <div class="field">
+          <label for="nick">닉네임</label>
+          <input id="nick" type="text" inputmode="text" maxlength="12" placeholder="리더보드에 표시될 이름" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="phone">연락처</label>
+          <input id="phone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="off" />
+        </div>
+        <p class="hint" id="formHint">* 연락처는 당첨 안내 용도로만 사용돼요.</p>
+        <label class="consent" for="agree">
+          <input type="checkbox" id="agree" />
+          <span class="box"></span>
+          <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 <span class="cmore">· 이벤트·혜택 안내를 받아요</span></span>
+        </label>
+        <button class="btn" id="makeBtn" style="margin-top:6px" disabled>내 링크 만들기 →</button>
+      </div>
+
+      <!-- 결과 상태 -->
+      <div class="result" id="refResult">
+        <p class="sec-label">MY LINK</p>
+        <p class="greet"><b id="rNick">제주러버</b>님의 추천 링크가 준비됐어요 🎉</p>
+        <p class="greet-sub">이 링크를 지인에게 공유하면 순위가 올라가요.</p>
+        <div class="linkbox">
+          <span class="url" id="rUrl">event.eataround.co.kr/r/AB12CD</span>
+          <button class="copybtn" id="copyBtn">복사</button>
+        </div>
+        <button class="btn kakao" id="shareBtn">💬 카카오톡으로 공유하기</button>
+        <div class="mystats">
+          <div class="mystat"><div class="n" id="rRank">24위</div><div class="l">현재 내 순위</div></div>
+          <div class="mystat"><div class="n" id="rCnt">6명</div><div class="l">내가 모은 추천</div></div>
+        </div>
+        <button class="reset" id="resetBtn">다른 정보로 다시 만들기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 리더보드 -->
+  <section class="card board">
+    <div class="pad">
+      <p class="sec-label">🏆 LEADERBOARD</p>
+      <h2 class="sec-title" style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <span>실시간 순위<span class="sub">지인이 정보를 남긴 수 기준</span></span>
+        <span class="live"><span class="ping"></span>LIVE</span>
+      </h2>
+      <div id="boardList"></div>
+    </div>
+  </section>
+
+  <!-- 참여방법 -->
+  <section class="card howto">
+    <div class="pad">
+      <p class="sec-label">HOW TO</p>
+      <h2 class="sec-title">참여 방법</h2>
+      <div class="step"><div class="num">1</div><div class="tx"><b>닉네임·연락처</b>를 남기고 내 추천 링크를 받아요.</div></div>
+      <div class="step"><div class="num">2</div><div class="tx">링크를 <b>지인에게 공유</b>해요. (카톡·문자·SNS)</div></div>
+      <div class="step"><div class="num">3</div><div class="tx">지인이 정보를 남기면 <b>내 순위가 올라가요</b> 🎉</div></div>
+    </div>
+  </section>
+
+  <!-- 유의사항 -->
+  <section class="notice">
+    <h3>유의사항</h3>
+    <ul>
+      <li>순위는 신청 시 입력한 <b>닉네임</b>으로 표시되며, 실명은 공개되지 않아요.</li>
+      <li>같은 방문자가 여러 번 정보를 남겨도 순위에는 <b>1회만</b> 반영돼요.</li>
+      <li>수집된 정보는 이벤트 안내·당첨 연락 용도로만 사용돼요.</li>
+      <li>상위 당첨자는 지급 전 제출 내역을 확인하는 절차가 있어요.</li>
+      <li>혜택 구성과 일정은 운영 상황에 따라 일부 조정될 수 있어요.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="fl">eat.around</div>
+    <div>가장 제주다운 여행, 이더라운드</div>
+    <div style="margin-top:8px;opacity:.8">문의 채널톡 · © 2026 eataround</div>
+  </footer>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===== 설정 (목업) ===== */
+  var END_DATE = new Date('2026-07-19T23:59:59+09:00'); // 마감일 (데모용)
+  var LINK_BASE = 'event.eataround.co.kr/r/';
+
+  /* 리더보드 더미 데이터 */
+  var BOARD = [
+    {nick:'제주러버',  cnt:42},
+    {nick:'바다왕',    cnt:38},
+    {nick:'돌하르방',  cnt:35},
+    {nick:'감귤조아',  cnt:29},
+    {nick:'오름지기',  cnt:24},
+    {nick:'성산일출',  cnt:21},
+    {nick:'한라산',    cnt:18},
+    {nick:'흑돼지파',  cnt:15},
+    {nick:'해녀의꿈',  cnt:13},
+    {nick:'올레꾼',    cnt:11}
+  ];
+
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ===== 토스트 ===== */
+  var toastTimer;
+  function toast(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  /* ===== 카운트다운 ===== */
+  function tick(){
+    var now = new Date();
+    var diff = END_DATE - now;
+    if(diff < 0) diff = 0;
+    var d = Math.floor(diff/86400000);
+    $('dday').textContent = 'D-' + d;
+  }
+  tick();
+  setInterval(tick, 60000);
+
+  /* ===== 전화번호 자동 하이픈 ===== */
+  var phone = $('phone');
+  phone.addEventListener('input', function(){
+    var v = phone.value.replace(/[^0-9]/g,'').slice(0,11);
+    if(v.length < 4){ phone.value = v; }
+    else if(v.length < 8){ phone.value = v.slice(0,3)+'-'+v.slice(3); }
+    else { phone.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7); }
+    phone.classList.remove('err');
+    $('formHint').classList.remove('err');
+  });
+  $('nick').addEventListener('input', function(){ this.classList.remove('err'); });
+
+  /* ===== 마케팅 수신 동의 → 버튼 활성화 ===== */
+  var agree = $('agree');
+  var makeBtn = $('makeBtn');
+  agree.addEventListener('change', function(){ makeBtn.disabled = !agree.checked; });
+
+  /* ===== 코드 생성 (목업) ===== */
+  function makeCode(seed){
+    var s = 0;
+    for(var i=0;i<seed.length;i++){ s = (s*31 + seed.charCodeAt(i)) >>> 0; }
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var code = '';
+    for(var j=0;j<6;j++){ code += chars[s % chars.length]; s = Math.floor(s/chars.length) + (j+1)*7; }
+    return code;
+  }
+
+  /* ===== 저장/복원 ===== */
+  var store = {
+    save:function(o){ try{ localStorage.setItem('ea_ref', JSON.stringify(o)); }catch(e){} },
+    load:function(){ try{ return JSON.parse(localStorage.getItem('ea_ref')); }catch(e){ return null; } },
+    clear:function(){ try{ localStorage.removeItem('ea_ref'); }catch(e){} }
+  };
+
+  /* ===== 리더보드 렌더 ===== */
+  function renderBoard(me){
+    var html = '';
+    var medals = ['🥇','🥈','🥉'];
+    BOARD.forEach(function(r, i){
+      var rank = i+1;
+      var rankCell = i<3
+        ? '<div class="rank medal">'+medals[i]+'</div>'
+        : '<div class="rank">'+rank+'</div>';
+      html += '<div class="row">'+rankCell+
+        '<div class="who"><div class="nick">'+esc(r.nick)+'</div></div>'+
+        '<div class="cnt">'+r.cnt+'<span>명</span></div></div>';
+      if(rank===10){
+        html += '<div class="cut">🎁 여기까지 순위 보상</div>';
+      }
+    });
+    if(me){
+      html += '<div class="row me"><div class="rank">24</div>'+
+        '<div class="who"><div class="nick">'+esc(me.nick)+' <span style="font-size:11px;color:var(--green-mid)">· 나</span></div>'+
+        '<div class="tag">조금만 더 공유하면 순위가 올라가요!</div></div>'+
+        '<div class="cnt">6<span>명</span></div></div>';
+    }
+    $('boardList').innerHTML = html;
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  /* ===== 결과 화면 표시 ===== */
+  function showResult(data){
+    $('rNick').textContent = data.nick;
+    $('rUrl').textContent = LINK_BASE + data.code;
+    $('rRank').textContent = '24위';
+    $('rCnt').textContent = '6명';
+    $('refForm').style.display = 'none';
+    var res = $('refResult');
+    res.classList.add('show');
+    renderBoard(data);
+  }
+  function showForm(){
+    $('refForm').style.display = 'block';
+    $('refResult').classList.remove('show');
+    renderBoard(null);
+  }
+
+  /* ===== 링크 만들기 ===== */
+  $('makeBtn').addEventListener('click', function(){
+    var nick = $('nick').value.trim();
+    var ph = $('phone').value.trim();
+    var ok = true;
+    if(nick.length < 1){ $('nick').classList.add('err'); ok=false; }
+    if(!/^010-\d{4}-\d{4}$/.test(ph)){ phone.classList.add('err'); ok=false; }
+    if(!ok){
+      var h = $('formHint'); h.classList.add('err');
+      h.textContent = '닉네임과 올바른 연락처(010-0000-0000)를 입력해 주세요.';
+      return;
+    }
+    if(!agree.checked){ return; }
+    var data = { nick:nick, phone:ph, agree:true, code:makeCode(ph+nick) };
+    store.save(data);
+    showResult(data);
+    toast('추천 링크가 만들어졌어요!');
+    setTimeout(function(){ $('refResult').scrollIntoView({behavior:'smooth',block:'center'}); }, 200);
+  });
+
+  /* ===== 복사 ===== */
+  function copyLink(){
+    var url = 'https://' + $('rUrl').textContent;
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){ toast('링크가 복사됐어요 📋'); }, fallbackCopy);
+    } else { fallbackCopy(); }
+    function fallbackCopy(){
+      var ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); toast('링크가 복사됐어요 📋'); }catch(e){ toast('복사에 실패했어요'); }
+      document.body.removeChild(ta);
+    }
+  }
+  $('copyBtn').addEventListener('click', copyLink);
+  $('shareBtn').addEventListener('click', function(){
+    copyLink();
+    toast('링크 복사 완료! 카카오톡에 붙여넣어 공유하세요 💬');
+  });
+
+  /* ===== 다시 만들기 ===== */
+  $('resetBtn').addEventListener('click', function(){
+    store.clear();
+    $('nick').value=''; $('phone').value='';
+    agree.checked = false; makeBtn.disabled = true;
+    $('formHint').classList.remove('err');
+    $('formHint').textContent = '* 연락처는 당첨 안내 용도로만 사용돼요.';
+    showForm();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  /* ===== 초기 진입 분기 (옵션1: ?me= / 옵션2: 저장된 정보) ===== */
+  function init(){
+    var params = new URLSearchParams(location.search);
+    var meCode = params.get('me');
+    var saved = store.load();
+    if(meCode){
+      var d = saved && saved.code===meCode ? saved : { nick: (saved&&saved.nick) || '참여자', phone:'', code:meCode };
+      store.save(d);
+      showResult(d);
+    } else if(saved && saved.code){
+      showResult(saved);
+    } else {
+      showForm();
+    }
+  }
+  init();
+})();
+</script>
+</body>
+</html>
