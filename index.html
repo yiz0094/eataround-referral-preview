@@ -74,36 +74,40 @@
   .sec-title .sub{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:5px;letter-spacing:0;}
 
   /* ===== 히어로 ===== */
-  .hero{
-    position:relative;overflow:hidden;border-radius:var(--radius);
-    background:linear-gradient(160deg,#2C5A3F 0%,#1F4634 62%,#163A2B 100%);
-    color:#fff;padding:34px 24px 30px;box-shadow:var(--shadow);
-  }
-  .hero .blob{
-    position:absolute;right:-46px;top:-46px;width:190px;height:190px;
-    background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.14),rgba(255,255,255,0) 70%);
-    border-radius:50%;
-  }
-  .hero .oreum{position:absolute;left:0;right:0;bottom:-2px;width:100%;opacity:.5;}
-  .hero-badge{
-    display:inline-flex;align-items:center;gap:6px;
-    background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
-    color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;
-    letter-spacing:.02em;backdrop-filter:blur(4px);
-  }
-  .hero h1{
-    position:relative;font-size:27px;line-height:1.32;font-weight:800;
-    margin:16px 0 10px;letter-spacing:-.03em;
-  }
-  .hero h1 .hl{color:#CFE6D5;}
-  .hero p{position:relative;font-size:14.5px;color:rgba(255,255,255,.86);margin:0;max-width:30ch;}
-  .hero .stat-row{position:relative;display:flex;gap:10px;margin-top:20px;}
-  .hero .stat{
-    flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
-    border-radius:var(--radius-sm);padding:12px 13px;backdrop-filter:blur(4px);
-  }
-  .hero .stat .n{font-size:18px;font-weight:800;letter-spacing:-.02em;}
-  .hero .stat .l{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:2px;}
+  .hero{position:relative;overflow:hidden;border-radius:var(--radius);color:#fff;box-shadow:var(--shadow);min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-photo{position:absolute;inset:0;background:#1F4634 url('images/jeju-hero.jpg') center 62% / cover no-repeat;}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,56,42,.5) 0%,rgba(22,56,42,.12) 28%,rgba(20,44,33,.74) 68%,rgba(15,38,28,.95) 100%);}
+  .hero-body{position:relative;padding:26px 22px 24px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;letter-spacing:.02em;backdrop-filter:blur(4px);}
+  .hero h1{position:relative;font-size:30px;line-height:1.28;font-weight:800;margin:14px 0 10px;letter-spacing:-.03em;text-shadow:0 2px 18px rgba(0,0,0,.4);}
+  .hero h1 .hl{color:#FFE08A;}
+  .hero p{position:relative;font-size:14.5px;color:rgba(255,255,255,.92);margin:0 0 18px;text-shadow:0 1px 12px rgba(0,0,0,.35);}
+  .hero p b{color:#fff;font-weight:800;}
+
+  /* 히어로 번호 캡처 카드 */
+  .capture{background:#fff;border-radius:18px;padding:16px;box-shadow:0 16px 40px rgba(0,0,0,.26);}
+  .capture-hook{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;font-weight:800;color:var(--green-dark);margin-bottom:11px;}
+  .capture-hook span{font-size:11px;font-weight:700;color:var(--green-mid);background:var(--green-soft);padding:3px 9px;border-radius:999px;}
+  .cap-row{display:flex;gap:8px;}
+  .cap-row input{flex:1;min-width:0;padding:14px;font-size:15px;color:var(--ink);border:1.5px solid var(--line);border-radius:12px;background:#FAFBFA;outline:none;transition:border-color .15s,background .15s;}
+  .cap-row input:focus{border-color:var(--green-mid);background:#fff;}
+  .cap-row input.err{border-color:var(--danger);background:#FCF4F2;}
+  .cap-btn{flex:none;padding:14px 22px;font-size:15px;font-weight:800;border-radius:12px;background:var(--green);color:#fff;transition:background .15s,transform .06s;white-space:nowrap;}
+  .cap-btn:active{transform:scale(.97);}
+  .cap-btn:hover{background:var(--green-dark);}
+  .cap-btn:disabled{background:#CFD6D0;cursor:not-allowed;}
+  .cap-btn:disabled:hover{background:#CFD6D0;}
+  .cap-consent{display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:11px;user-select:none;}
+  .cap-consent input{position:absolute;opacity:0;width:0;height:0;}
+  .cap-consent .box{flex:none;width:19px;height:19px;border:1.5px solid #C9D3CC;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
+  .cap-consent .box::after{content:"";width:9px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) scale(0);transition:transform .15s;margin-top:-2px;}
+  .cap-consent input:checked + .box{background:var(--green);border-color:var(--green);}
+  .cap-consent input:checked + .box::after{transform:rotate(-45deg) scale(1);}
+  .cap-consent .ctxt{font-size:12px;color:var(--ink);}
+  .cap-consent .ctxt b{color:var(--green);font-weight:800;}
+  .cap-trust{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:13px;font-size:11.5px;color:var(--muted);}
+  .cap-trust b{color:var(--green-dark);font-weight:800;}
+  .cap-trust i{width:3px;height:3px;border-radius:50%;background:#CBD3CC;}
 
   /* ===== 내 추천 링크 카드 ===== */
   .ref .field{margin-bottom:12px;}
@@ -211,6 +215,12 @@
   .allreward .em{font-size:26px;}
   .allreward .t{font-size:14.5px;font-weight:800;}
   .allreward .d{font-size:12.5px;color:rgba(255,255,255,.82);margin-top:2px;}
+  .grand{display:flex;gap:10px;margin-bottom:16px;}
+  .grand-card{flex:1;border-radius:14px;overflow:hidden;position:relative;border:1px solid var(--line);}
+  .grand-img{height:110px;background-size:cover;background-position:center;}
+  .grand-cap{position:absolute;left:0;right:0;bottom:0;padding:18px 11px 9px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.76));color:#fff;font-size:12.5px;font-weight:700;}
+  .grand-cap b{display:inline-block;background:var(--gold);color:#fff;font-size:10px;font-weight:800;padding:1px 7px;border-radius:999px;margin-right:5px;vertical-align:middle;}
+  .grand-card.silver .grand-cap b{background:var(--silver);}
 
   /* ===== 참여방법 ===== */
   .step{display:flex;gap:14px;padding:11px 2px;}
@@ -287,17 +297,30 @@
 
 <main>
 
-  <!-- 히어로 -->
+  <!-- 히어로 (번호 캡처형) -->
   <section class="hero">
-    <span class="blob"></span>
-    <svg class="oreum" viewBox="0 0 520 90" preserveAspectRatio="none"><path d="M0 90 C60 50 110 36 170 56 C220 72 250 30 320 44 C390 58 430 34 520 62 L520 90 Z" fill="#16382A"/></svg>
-    <span class="hero-badge">🌿 레퍼럴 프로모션 2026</span>
-    <h1>추천할수록 가까워지는<br><span class="hl">제주 여행 혜택</span></h1>
-    <p>내 추천 링크로 지인이 이더라운드를 만나면, 순위가 올라가고 혜택이 따라와요.</p>
-    <div class="stat-row">
-      <div class="stat"><div class="n" id="hStat1">312</div><div class="l">지금까지 모인 추천</div></div>
-      <div class="stat"><div class="n">10<span style="font-size:13px">명</span></div><div class="l">혜택 받는 인원</div></div>
-      <div class="stat"><div class="n">2주</div><div class="l">진행 기간</div></div>
+    <div class="hero-photo"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-body">
+      <span class="hero-badge">🌿 레퍼럴 프로모션 2026</span>
+      <h1>제주 왕복 항공권<br><span class="hl">5성급 호텔</span>이 걸렸다</h1>
+      <p>지인에게 추천하고 순위에 들면 끝. <b>번호만 남겨도 제주 맛집 지도</b>를 바로 드려요.</p>
+
+      <div class="capture">
+        <div class="capture-hook">🎁 번호 남기고 시작하기<span>30초면 끝</span></div>
+        <div class="cap-row">
+          <input id="hPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="off" />
+          <button class="cap-btn" id="hSubmit" disabled>참여하기</button>
+        </div>
+        <label class="cap-consent" for="hAgree">
+          <input type="checkbox" id="hAgree" />
+          <span class="box"></span>
+          <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 · 이벤트·혜택 안내</span>
+        </label>
+        <div class="cap-trust">
+          <span>👥 이미 <b>312명</b> 참여 중</span><i></i><span>🎁 혜택 <b>단 10명</b></span><i></i><span>⏱ 마감 <b>D-<span id="ddayHero">39</span></b></span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -306,6 +329,10 @@
     <div class="pad">
       <p class="sec-label">🎁 REWARD</p>
       <h2 class="sec-title">순위 혜택<span class="sub">2주 종료 후 순위에 따라 지급돼요.</span></h2>
+      <div class="grand">
+        <div class="grand-card"><div class="grand-img" style="background-image:url('images/prize-hotel.jpg')"></div><div class="grand-cap"><b>1등</b> 제주 5성급 호텔 1박</div></div>
+        <div class="grand-card silver"><div class="grand-img" style="background-image:url('images/prize-flight.jpg')"></div><div class="grand-cap"><b>2등</b> 제주 왕복 항공권</div></div>
+      </div>
       <div class="prize"><div class="medal-ic m1">1</div><div class="info"><div class="t">제주 5성급 호텔 스탠다드 1박권</div><div class="r">1등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m2">2</div><div class="info"><div class="t">제주 왕복 항공권</div><div class="r">2등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m3">3</div><div class="info"><div class="t">리몬첼로 만들기 프로그램 체험권 <span class="cap">2인</span></div><div class="r">3등</div></div><div class="ppl">1명</div></div>
@@ -407,7 +434,7 @@
 </main>
 
 <!-- 하단 플로팅 번호 입력 배너 -->
-<div class="floatbar" id="floatBar">
+<div class="floatbar" id="floatBar" style="display:none">
   <div class="fb-inner">
     <div id="fbForm">
       <div class="fb-hook">🎁 번호만 남겨도 <b>제주 로컬 맛집 지도</b>를 드려요</div>
@@ -422,7 +449,7 @@
       </label>
     </div>
     <div id="fbDone" style="display:none">
-      <div class="fb-done">🎉 번호가 등록됐어요! 추첨에 자동 참여돼요.</div>
+      <div class="fb-done">🎉 번호가 등록됐어요! 맛집 지도를 보내드릴게요.</div>
       <button class="fb-next" id="fbNext">내 추천 링크 받고 순위 도전하기 →</button>
     </div>
   </div>
@@ -471,6 +498,7 @@
     if(diff < 0) diff = 0;
     var d = Math.floor(diff/86400000);
     $('dday').textContent = 'D-' + d;
+    var dh = $('ddayHero'); if(dh){ dh.textContent = d; }
   }
   tick();
   setInterval(tick, 60000);
@@ -544,13 +572,13 @@
     $('refForm').style.display = 'none';
     var res = $('refResult');
     res.classList.add('show');
-    var fbBox = $('floatBar'); if(fbBox){ fbBox.style.display = 'none'; }
+    participated = true; updateBar();
     renderBoard(data);
   }
   function showForm(){
     $('refForm').style.display = 'block';
     $('refResult').classList.remove('show');
-    var fbBox = $('floatBar'); if(fbBox){ fbBox.style.display = 'block'; }
+    participated = false; updateBar();
     renderBoard(null);
   }
 
@@ -640,6 +668,38 @@
     $('fbDone').style.display = 'none';
     $('fbForm').style.display = 'block';
   }
+
+  /* ===== 히어로 번호 캡처 ===== */
+  var hPhone = $('hPhone'), hAgree = $('hAgree'), hSubmit = $('hSubmit');
+  hPhone.addEventListener('input', function(){
+    var v = hPhone.value.replace(/[^0-9]/g,'').slice(0,11);
+    if(v.length < 4){ hPhone.value = v; }
+    else if(v.length < 8){ hPhone.value = v.slice(0,3)+'-'+v.slice(3); }
+    else { hPhone.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7); }
+    hPhone.classList.remove('err');
+  });
+  hAgree.addEventListener('change', function(){ hSubmit.disabled = !hAgree.checked; });
+  hSubmit.addEventListener('click', function(){
+    var ph = hPhone.value.trim();
+    if(!/^010-\d{4}-\d{4}$/.test(ph)){ hPhone.classList.add('err'); toast('연락처를 010-0000-0000 형식으로 입력해 주세요.'); return; }
+    if(!hAgree.checked){ return; }
+    $('phone').value = ph; agree.checked = true; makeBtn.disabled = false; $('formHint').classList.remove('err');
+    toast('번호 등록 완료! 🎉 닉네임만 정하면 끝이에요.');
+    document.querySelector('.ref').scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(function(){ $('nick').focus(); }, 500);
+  });
+
+  /* ===== 플로팅 배너 노출 제어 (히어로 지나면 등장) ===== */
+  var participated = false;
+  function updateBar(){
+    var fb = $('floatBar'); if(!fb) return;
+    if(participated){ fb.style.display = 'none'; return; }
+    var hero = document.querySelector('.hero');
+    var th = hero ? hero.offsetHeight * 0.6 : 400;
+    fb.style.display = (window.scrollY > th) ? 'block' : 'none';
+  }
+  window.addEventListener('scroll', updateBar, {passive:true});
+  window.addEventListener('resize', updateBar);
 
   /* ===== 초기 진입 분기 (옵션1: ?me= / 옵션2: 저장된 정보) ===== */
   function init(){
