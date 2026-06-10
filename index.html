@@ -65,7 +65,7 @@
   .dday b{font-variant-numeric:tabular-nums;}
 
   /* ===== 레이아웃 ===== */
-  main{max-width:520px;margin:0 auto;padding:16px 16px 60px;}
+  main{max-width:520px;margin:0 auto;padding:16px 16px 180px;}
   section{margin-top:16px;}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);}
   .pad{padding:22px;}
@@ -229,13 +229,41 @@
 
   /* ===== 토스트 ===== */
   .toast{
-    position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    position:fixed;left:50%;bottom:138px;transform:translateX(-50%) translateY(20px);
     background:var(--green-deep);color:#fff;font-size:13.5px;font-weight:600;
     padding:13px 20px;border-radius:999px;box-shadow:0 12px 30px rgba(0,0,0,.2);
     opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100;
     display:flex;align-items:center;gap:8px;max-width:90vw;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* ===== 하단 플로팅 번호 입력 배너 ===== */
+  .floatbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 26px rgba(31,70,52,.12);padding:12px 16px calc(12px + env(safe-area-inset-bottom));}
+  .fb-inner{max-width:520px;margin:0 auto;}
+  .fb-hook{font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:9px;}
+  .fb-hook b{color:var(--green);font-weight:800;}
+  .fb-row{display:flex;gap:8px;}
+  .fb-row input{flex:1;min-width:0;padding:13px 14px;font-size:15px;color:var(--ink);border:1.5px solid var(--line);border-radius:12px;background:#FAFBFA;outline:none;transition:border-color .15s,background .15s;}
+  .fb-row input:focus{border-color:var(--green-mid);background:#fff;}
+  .fb-row input.err{border-color:var(--danger);background:#FCF4F2;}
+  .fb-submit{flex:none;padding:13px 20px;font-size:15px;font-weight:800;border-radius:12px;background:var(--green);color:#fff;transition:background .15s,transform .06s;white-space:nowrap;}
+  .fb-submit:active{transform:scale(.97);}
+  .fb-submit:hover{background:var(--green-dark);}
+  .fb-submit:disabled{background:#CFD6D0;cursor:not-allowed;}
+  .fb-submit:disabled:hover{background:#CFD6D0;}
+  .fb-consent{display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-top:10px;user-select:none;}
+  .fb-consent input{position:absolute;opacity:0;width:0;height:0;}
+  .fb-consent .box{flex:none;width:19px;height:19px;border:1.5px solid #C9D3CC;border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
+  .fb-consent .box::after{content:"";width:9px;height:5px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) scale(0);transition:transform .15s;margin-top:-2px;}
+  .fb-consent input:checked + .box{background:var(--green);border-color:var(--green);}
+  .fb-consent input:checked + .box::after{transform:rotate(-45deg) scale(1);}
+  .fb-consent input:focus-visible + .box{box-shadow:0 0 0 3px rgba(44,90,63,.18);}
+  .fb-consent .ctxt{font-size:12px;color:var(--ink);}
+  .fb-consent .ctxt b{color:var(--green);font-weight:800;}
+  .fb-done{font-size:14px;font-weight:700;color:var(--green-dark);text-align:center;margin-bottom:11px;}
+  .fb-next{width:100%;padding:14px;font-size:15px;font-weight:800;border-radius:12px;background:var(--green);color:#fff;transition:background .15s,transform .06s;}
+  .fb-next:active{transform:scale(.99);}
+  .fb-next:hover{background:var(--green-dark);}
 
   @media (max-width:380px){
     .hero h1{font-size:24px;}
@@ -377,6 +405,28 @@
 
 </main>
 
+<!-- 하단 플로팅 번호 입력 배너 -->
+<div class="floatbar" id="floatBar">
+  <div class="fb-inner">
+    <div id="fbForm">
+      <div class="fb-hook">🎁 번호만 남겨도 <b>제주 로컬 맛집 지도</b>를 드려요</div>
+      <div class="fb-row">
+        <input id="fbPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="off" />
+        <button class="fb-submit" id="fbSubmit" disabled>번호 제출</button>
+      </div>
+      <label class="fb-consent" for="fbAgree">
+        <input type="checkbox" id="fbAgree" />
+        <span class="box"></span>
+        <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 · 이벤트·혜택 안내</span>
+      </label>
+    </div>
+    <div id="fbDone" style="display:none">
+      <div class="fb-done">🎉 번호가 등록됐어요! 추첨에 자동 참여돼요.</div>
+      <button class="fb-next" id="fbNext">내 추천 링크 받고 순위 도전하기 →</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -493,11 +543,13 @@
     $('refForm').style.display = 'none';
     var res = $('refResult');
     res.classList.add('show');
+    var fbBox = $('floatBar'); if(fbBox){ fbBox.style.display = 'none'; }
     renderBoard(data);
   }
   function showForm(){
     $('refForm').style.display = 'block';
     $('refResult').classList.remove('show');
+    var fbBox = $('floatBar'); if(fbBox){ fbBox.style.display = 'block'; }
     renderBoard(null);
   }
 
@@ -547,9 +599,46 @@
     agree.checked = false; makeBtn.disabled = true;
     $('formHint').classList.remove('err');
     $('formHint').textContent = '* 연락처는 당첨 안내 용도로만 사용돼요.';
+    resetBar();
     showForm();
     window.scrollTo({top:0,behavior:'smooth'});
   });
+
+  /* ===== 하단 플로팅 번호 입력 배너 ===== */
+  var fbPhone = $('fbPhone'), fbAgree = $('fbAgree'), fbSubmit = $('fbSubmit');
+  fbPhone.addEventListener('input', function(){
+    var v = fbPhone.value.replace(/[^0-9]/g,'').slice(0,11);
+    if(v.length < 4){ fbPhone.value = v; }
+    else if(v.length < 8){ fbPhone.value = v.slice(0,3)+'-'+v.slice(3); }
+    else { fbPhone.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7); }
+    fbPhone.classList.remove('err');
+  });
+  fbAgree.addEventListener('change', function(){ fbSubmit.disabled = !fbAgree.checked; });
+  fbSubmit.addEventListener('click', function(){
+    var ph = fbPhone.value.trim();
+    if(!/^010-\d{4}-\d{4}$/.test(ph)){
+      fbPhone.classList.add('err');
+      toast('연락처를 010-0000-0000 형식으로 입력해 주세요.');
+      return;
+    }
+    if(!fbAgree.checked){ return; }
+    // STEP1 폼에 연동 (닉네임만 정하면 바로 링크 발급)
+    $('phone').value = ph; agree.checked = true; makeBtn.disabled = false;
+    $('formHint').classList.remove('err');
+    $('fbForm').style.display = 'none';
+    $('fbDone').style.display = 'block';
+    toast('번호가 등록됐어요! 🎉');
+  });
+  $('fbNext').addEventListener('click', function(){
+    document.querySelector('.ref').scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(function(){ $('nick').focus(); }, 450);
+  });
+  function resetBar(){
+    fbPhone.value = ''; fbAgree.checked = false; fbSubmit.disabled = true;
+    fbPhone.classList.remove('err');
+    $('fbDone').style.display = 'none';
+    $('fbForm').style.display = 'block';
+  }
 
   /* ===== 초기 진입 분기 (옵션1: ?me= / 옵션2: 저장된 정보) ===== */
   function init(){
