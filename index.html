@@ -280,6 +280,287 @@
     .hero h1{font-size:24px;}
     .pad{padding:18px;}
   }
+
+  /* [미리보기] EVENT 섹션 구분 헤더 (네이버 티저 '이벤트1·2·3' 구조 참고, 그린 톤 유지) */
+  .ev-head{text-align:center;margin:36px 6px 0;}
+  .ev-label{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--green-dark);background:var(--green-soft);border:1px solid rgba(44,90,63,.2);padding:6px 15px;border-radius:999px;}
+  .ev-title{font-size:23px;font-weight:800;letter-spacing:-.03em;color:var(--ink);margin:13px 0 6px;line-height:1.32;}
+  .ev-title .hl{color:var(--green);}
+  .ev-sub{font-size:13.5px;color:var(--muted);margin:0;max-width:32ch;margin-left:auto;margin-right:auto;}
+
+  /* [미리보기] EVENT 콘텐츠 풍부화 */
+  .maplist{background:linear-gradient(135deg,var(--green),var(--green-dark));border-radius:16px;padding:18px;color:#fff;}
+  .maplist-top{display:flex;align-items:center;gap:13px;}
+  .maplist-ic{flex:none;width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:24px;}
+  .maplist-t{font-size:16px;font-weight:800;}
+  .maplist-d{font-size:12.5px;color:rgba(255,255,255,.85);margin-top:2px;}
+  .maplist-stats{display:flex;gap:10px;margin-top:15px;}
+  .maplist-stats .ms{flex:1;background:rgba(255,255,255,.12);border-radius:11px;padding:10px 8px;text-align:center;}
+  .maplist-stats .ms b{display:block;font-size:16px;font-weight:800;}
+  .maplist-stats .ms span{font-size:10.5px;color:rgba(255,255,255,.82);}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px;}
+  .cat{background:#FAFBFA;border:1px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;font-size:21px;line-height:1;}
+  .cat span{display:block;font-size:11px;font-weight:700;color:var(--ink);margin-top:6px;}
+  .getbox{margin-top:14px;background:var(--green-soft);border:1px solid rgba(44,90,63,.16);border-radius:12px;padding:13px 15px;font-size:12.5px;color:var(--green-dark);line-height:1.6;}
+  .getbox b{font-weight:800;}
+  .flow{display:flex;gap:8px;}
+  .flow-step{flex:1;background:#FAFBFA;border:1px solid var(--line);border-radius:13px;padding:14px 9px;text-align:center;}
+  .fs-ic{width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+  .fs-t{font-size:12.5px;font-weight:800;color:var(--ink);}
+  .fs-d{font-size:10.5px;color:var(--muted);margin-top:4px;line-height:1.4;}
+  .infobox .ib-t{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .infobox ul{margin:0;padding-left:18px;}
+  .infobox li{font-size:12.5px;color:var(--muted);margin-bottom:7px;line-height:1.55;}
+  .infobox li b{color:var(--green-dark);font-weight:700;}
+  .sched-row{display:flex;gap:12px;padding:10px 2px;border-bottom:1px solid #F2EFE7;}
+  .sched-row:last-child{border-bottom:none;}
+  .sched-when{flex:none;width:74px;font-size:12px;font-weight:800;color:var(--green);}
+  .sched-what{font-size:13px;color:var(--ink);line-height:1.45;}
+
+  /* [미리보기 v3] 히어로 입력 제거 + 맛집 리스트 티저 */
+  .hero{min-height:430px;}
+  .hero-trust{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:9px;font-size:12.5px;color:rgba(255,255,255,.92);text-shadow:0 1px 8px rgba(0,0,0,.45);}
+  .hero-trust b{color:#FFE08A;font-weight:800;}
+  .hero-trust i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.55);}
+  .listpeek{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;background:#fff;}
+  .listpeek-doc{padding:15px 16px;filter:blur(4.5px);user-select:none;}
+  .lp-h{font-size:13.5px;font-weight:800;color:var(--green-dark);margin-bottom:10px;}
+  .lp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F2EFE7;}
+  .lp-row:last-child{border-bottom:none;}
+  .lp-no{font-size:12px;font-weight:800;color:var(--green-mid);width:20px;}
+  .lp-nm{flex:1;font-size:13.5px;font-weight:700;color:var(--ink);}
+  .lp-meta{font-size:11.5px;color:var(--muted);}
+  .listpeek-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.74));}
+  .ll-ic{font-size:23px;}
+  .ll-t{font-size:15px;font-weight:800;color:var(--green-dark);margin-top:5px;}
+  .ll-d{font-size:11.5px;color:var(--muted);margin-top:3px;}
+  .howget{margin-top:16px;}
+  .hg-step{display:flex;gap:13px;padding:9px 0;position:relative;}
+  .hg-step:not(:last-child)::before{content:"";position:absolute;left:13px;top:33px;bottom:-1px;width:2px;background:var(--green-soft);}
+  .hg-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:1;}
+  .hg-tx{font-size:13px;color:var(--ink);line-height:1.5;padding-top:4px;}
+  .hg-tx b{color:var(--green-dark);font-weight:800;}
+  /* 초록 카드 안 안내 + 단계 */
+  .ml-unlock-t{font-size:17px;font-weight:800;color:#fff;}
+  .ml-unlock-d{font-size:12.5px;color:rgba(255,255,255,.85);margin-top:4px;padding-bottom:15px;border-bottom:1px solid rgba(255,255,255,.2);}
+  .ml-steps{margin-top:15px;display:flex;flex-direction:column;gap:14px;}
+  .mls{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.95);line-height:1.5;}
+  .mls b{color:#FFE08A;font-weight:800;}
+  .mls-n{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+
+  /* ============================================================
+     [미리보기] 네이버 맛집 티저 — 블랙 & 골드 풀 적용
+     ============================================================ */
+  :root{
+    --green:#C9A24B; --green-dark:#A47E2C; --green-deep:#0a0a0c; --green-mid:#E6C572;
+    --green-soft:rgba(201,162,75,.16); --green-tint:rgba(201,162,75,.10);
+    --sand:#0a0a0c; --card:#15131d; --ink:#F2ECDE; --muted:#9A9286;
+    --line:rgba(255,255,255,.09); --gold:#E6C572;
+  }
+  body{background:#0a0a0c;}
+  body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+    radial-gradient(120% 48% at 50% -8%, rgba(200,150,55,.28), rgba(10,10,12,0) 50%),
+    radial-gradient(90% 40% at 50% 106%, rgba(150,110,40,.1), rgba(10,10,12,0) 50%), transparent;}
+  .topbar{background:rgba(10,9,13,.85);border-bottom-color:rgba(255,255,255,.07);}
+  .logo img{height:22px;width:auto;display:block;filter:brightness(1.72) saturate(1.1);}
+  .dday{background:linear-gradient(135deg,#A47E2C,#E6C572);color:#241b06;}
+
+  /* 히어로 — 블랙 + 골드 트로피 무드 */
+  .hero{min-height:600px;}
+  .hero-photo{filter:brightness(.22) saturate(.55) contrast(1.05);}
+  .hero-shade{background:radial-gradient(78% 48% at 50% 24%, rgba(185,138,50,.42), rgba(10,9,12,0) 60%), linear-gradient(180deg,rgba(8,7,9,.62) 0%,rgba(8,7,9,.5) 38%,rgba(8,7,9,.9) 78%,rgba(7,6,8,1) 100%);}
+  .hero-body{text-align:center;}
+  .hero-stars{color:var(--gold);font-size:16px;letter-spacing:7px;margin-bottom:14px;text-shadow:0 0 20px rgba(230,197,114,.6);}
+  .hero-badge{background:rgba(230,197,114,.12);border-color:rgba(230,197,114,.5);color:#F0DCA0;}
+  .hero h1{font-size:33px;line-height:1.24;color:#E6C572;background:linear-gradient(180deg,#FCEBB2 0%,#E8C76C 48%,#BC8B33 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 2px 22px rgba(230,197,114,.28);}
+  .hero h1 .hl{-webkit-text-fill-color:transparent;color:#E6C572;}
+  .hero p{color:rgba(255,255,255,.86);}
+  .hero p b{color:var(--gold);}
+  .hero-trust{justify-content:center;color:rgba(255,255,255,.85);}
+  .hero-trust b{color:var(--gold);}
+  .hero-trust i{background:rgba(230,197,114,.4);}
+
+  /* EVENT 핀 라벨 + 헤드라인 */
+  .ev-head{margin-top:54px;}
+  .ev-label{color:var(--gold);border:1px solid rgba(230,197,114,.55);background:transparent;}
+  .ev-title{color:#F4EEE1;font-size:25px;} .ev-title .hl{color:var(--gold);}
+  .ev-sub{color:var(--muted);max-width:none;}
+
+  .card{background:var(--card);border-color:var(--line);box-shadow:0 18px 50px rgba(0,0,0,.6);}
+  .sec-label{color:var(--gold);} .sec-title{color:#F4EEE1;} .sec-title .sub{color:var(--muted);}
+
+  /* 맛집 리스트 블러 + 골드 카드 */
+  .listpeek{background:#100f15;border-color:var(--line);}
+  .lp-h{color:var(--gold);} .lp-nm{color:#F2ECDE;} .lp-no{color:var(--gold);} .lp-meta{color:var(--muted);}
+  .lp-row{border-bottom-color:rgba(255,255,255,.06);}
+  .listpeek-lock{background:linear-gradient(180deg,rgba(16,15,21,.35),rgba(16,15,21,.8));}
+  .maplist{background:linear-gradient(140deg,#2b2109,#15110a);border:1px solid rgba(230,197,114,.3);}
+  .ml-unlock-t{color:var(--gold);} .ml-unlock-d{color:rgba(255,255,255,.8);border-bottom-color:rgba(230,197,114,.25);}
+  .mls{color:rgba(255,255,255,.92);} .mls b{color:var(--gold);}
+  .mls-n{background:rgba(230,197,114,.2);color:var(--gold);}
+
+  /* 그랜드 프라이즈 + 경품 */
+  .grand-card{border-color:rgba(230,197,114,.3);}
+  .grand-cap b{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .grand-card.silver .grand-cap b{background:linear-gradient(135deg,#9a9a9a,#dcdcdc);color:#222;}
+  .prize{border-bottom-color:rgba(255,255,255,.06);}
+  .prize .info .t{color:#F2ECDE;} .prize .info .t .cap{background:rgba(230,197,114,.16);color:#EBD597;}
+  .prize .info .r{color:var(--muted);} .prize .ppl{color:var(--gold);}
+  .medal-ic.m4,.medal-ic.m5{background:rgba(230,197,114,.16);color:#EBD597;}
+
+  /* 리더보드 = 랭킹 */
+  .live{color:var(--gold);} .live .ping{background:var(--gold);}
+  .row{border-bottom-color:rgba(255,255,255,.06);} .rank{color:var(--muted);}
+  .who .nick{color:#F2ECDE;} .who .tag{color:var(--muted);}
+  .cnt{color:var(--gold);} .cnt span{color:var(--muted);}
+  .row.me{background:linear-gradient(90deg,rgba(230,197,114,.18),rgba(21,19,29,0));box-shadow:inset 0 0 0 1.5px rgba(230,197,114,.45);}
+  .row.me .nick{color:#F4E8C2;}
+  .cut{color:var(--gold);} .cut::before,.cut::after{background:repeating-linear-gradient(90deg,rgba(230,197,114,.45) 0 6px,transparent 6px 11px);}
+
+  /* ref 폼 + 결과 */
+  .ref label{color:#F2ECDE;}
+  .ref input{background:#100f15;border-color:rgba(255,255,255,.14);color:#F2ECDE;}
+  .ref input:focus{border-color:var(--gold);background:#15131c;}
+  .hint{color:var(--muted);}
+  .btn{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .btn:hover{background:linear-gradient(135deg,#A87E28,#E6C572);}
+  .btn.secondary{background:rgba(230,197,114,.14);color:#EBD597;}
+  .btn:disabled,.btn:disabled:hover{background:#39362f;color:#7d7567;}
+  .btn.kakao{background:#FAE100;color:#3A1D1D;}
+  .consent .box,.fb-consent .box{background:#100f15;border-color:rgba(255,255,255,.22);}
+  .consent input:checked + .box,.fb-consent input:checked + .box{background:var(--gold);border-color:var(--gold);}
+  .consent input:checked + .box::after,.fb-consent input:checked + .box::after{border-color:#241b06;}
+  .consent .ctxt{color:#CFC8BA;} .consent .ctxt b{color:var(--gold);}
+  .greet{color:#F2ECDE;} .greet b{color:var(--gold);} .greet-sub{color:var(--muted);}
+  .linkbox{background:rgba(230,197,114,.1);border-color:rgba(230,197,114,.35);} .linkbox .url{color:#EBD597;}
+  .copybtn{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .mystat{background:#100f15;border-color:var(--line);} .mystat .n{color:var(--gold);} .mystat .l{color:var(--muted);}
+
+  /* infobox / 일정 */
+  .infobox .ib-t{color:#F4EEE1;} .infobox li{color:var(--muted);} .infobox li b{color:var(--gold);}
+  .sched-row{border-bottom-color:rgba(255,255,255,.06);} .sched-when{color:var(--gold);} .sched-what{color:#D9D2C4;}
+
+  /* 유의 / 푸터 */
+  .notice h3{color:var(--muted);} .notice li{color:var(--muted);} .notice li b{color:#CFC8BA;}
+  footer{color:var(--muted);} footer .fl{color:#F2ECDE;}
+
+  /* 플로팅 골드 CTA */
+  .floatbar{background:rgba(12,11,16,.97);border-top-color:rgba(230,197,114,.3);box-shadow:0 -12px 34px rgba(0,0,0,.7);}
+  .fb-hook{color:var(--muted);} .fb-hook b{color:var(--gold);}
+  .fb-row input{background:#100f15;border-color:rgba(255,255,255,.14);color:#F2ECDE;}
+  .fb-submit{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .fb-submit:disabled,.fb-submit:disabled:hover{background:#39362f;color:#7d7567;}
+  .fb-consent .ctxt{color:#CFC8BA;} .fb-consent .ctxt b{color:var(--gold);}
+  .fb-done{color:#EBD597;} .fb-next{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .toast{background:linear-gradient(135deg,#2a2109,#4a3a16);color:#F4E8C2;border:1px solid rgba(230,197,114,.3);}
+  input::placeholder{color:#6f6a60;}
+
+  /* 알림 배너 */
+  .promo-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;background:linear-gradient(135deg,#211a0c,#15120c)!important;border:1px solid rgba(230,197,114,.22)!important;}
+  .pb-t{font-size:15px;font-weight:800;color:#F4EEE1;}
+  .pb-d{font-size:12.5px;color:var(--muted);margin-top:3px;}
+  .pb-btn{flex:none;background:#fff;color:#1a1a1a;font-weight:800;font-size:13.5px;padding:11px 18px;border-radius:999px;white-space:nowrap;}
+
+  /* FAQ 아코디언 */
+  .faq{margin-top:2px;}
+  .faq-item{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:10px;overflow:hidden;}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;font-size:14px;font-weight:700;color:#F2ECDE;user-select:none;}
+  .faq-q .chev{color:var(--gold);font-size:18px;transition:transform .2s;}
+  .faq-item.open .faq-q .chev{transform:rotate(180deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease;}
+  .faq-a-in{padding:0 18px 16px;font-size:13px;color:var(--muted);line-height:1.65;}
+  .faq-a-in b{color:#CFC8BA;font-weight:700;}
+  .faq-item.open .faq-a{max-height:260px;}
+
+  /* ============ 모션 + 추가 콘텐츠 ============ */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .65s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  @keyframes glowPulse{0%,100%{opacity:.78;}50%{opacity:1;}}
+  @keyframes twinkle{0%,100%{opacity:.5;text-shadow:0 0 5px rgba(230,197,114,.35);}50%{opacity:1;text-shadow:0 0 16px rgba(230,197,114,.95);}}
+  @keyframes shine{0%{transform:translateX(-30px) skewX(-20deg);}55%,100%{transform:translateX(440%) skewX(-20deg);}}
+  @keyframes bob{0%,100%{transform:translateY(0);opacity:.65;}50%{transform:translateY(7px);opacity:1;}}
+  @media (prefers-reduced-motion:no-preference){
+    body::before{animation:glowPulse 5s ease-in-out infinite;}
+    .hero-stars span{display:inline-block;animation:twinkle 2.6s ease-in-out infinite;}
+    .hero-stars span:nth-child(2){animation-delay:.4s;}
+    .hero-stars span:nth-child(3){animation-delay:.8s;}
+    .hero-stars span:nth-child(4){animation-delay:1.2s;}
+    .hero-stars span:nth-child(5){animation-delay:1.6s;}
+    .fb-submit{position:relative;overflow:hidden;}
+    .fb-submit::after{content:"";position:absolute;top:-10%;left:0;width:26%;height:120%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.6s ease-in-out infinite;pointer-events:none;}
+    .scrolldown .ch{animation:bob 1.6s ease-in-out infinite;}
+  }
+  .hero-stars span{margin:0 3px;}
+  /* 리더보드 진행 바 */
+  .row{position:relative;}
+  .row > *{position:relative;z-index:1;}
+  .row .rankbar{position:absolute;left:0;top:6px;bottom:6px;width:0;background:linear-gradient(90deg,rgba(230,197,114,.22),rgba(230,197,114,.03));border-radius:8px;z-index:0;transition:width 1.05s cubic-bezier(.2,.7,.3,1);}
+  /* 히어로 스크롤 인디케이터 */
+  .scrolldown{margin:20px auto 0;width:-moz-fit-content;width:fit-content;color:rgba(255,255,255,.55);font-size:11px;text-align:center;}
+  .scrolldown .ch{display:block;font-size:20px;color:var(--gold);line-height:1;margin-top:2px;}
+  /* 실시간 참여 피드 */
+  .livefeed{display:flex;align-items:center;gap:11px;padding:13px 16px;}
+  .lf-badge{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#fff;background:#d23b3b;padding:4px 9px;border-radius:999px;}
+  .lf-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:glowPulse 1.1s infinite;}
+  .lf-msg{font-size:13px;color:#E8E2D4;transition:opacity .25s;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .lf-msg b{color:var(--gold);font-weight:700;}
+  /* 필터 탭 */
+  .ltabs{display:flex;gap:6px;background:#100f15;border:1px solid var(--line);border-radius:10px;padding:4px;margin:0 0 14px;}
+  .ltab{flex:1;text-align:center;font-size:12.5px;font-weight:700;color:var(--muted);padding:8px;border-radius:7px;cursor:pointer;transition:.15s;}
+  .ltab.on{background:rgba(230,197,114,.16);color:var(--gold);}
+  /* 경품 당첨 배지 */
+  .winbadge{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:800;color:#241b06;background:linear-gradient(135deg,#B98E32,#EBCE78);padding:6px 14px;border-radius:999px;}
+
+  /* ============ 섹션별 액센트 컬러 ============ */
+  .ev-head{position:relative;}
+  .ev-head::before{content:"";position:absolute;left:50%;top:-24px;transform:translateX(-50%);width:240px;height:104px;border-radius:50%;filter:blur(34px);opacity:.2;z-index:-1;pointer-events:none;}
+  .ev-head.acc-amber .ev-label{color:#EAB54C;border-color:rgba(234,181,76,.55);} .ev-head.acc-amber .ev-title .hl{color:#EAB54C;} .ev-head.acc-amber::before{background:#EAB54C;}
+  .ev-head.acc-emerald .ev-label{color:#4FCF98;border-color:rgba(79,207,152,.55);} .ev-head.acc-emerald .ev-title .hl{color:#4FCF98;} .ev-head.acc-emerald::before{background:#4FCF98;}
+  .ev-head.acc-sky .ev-label{color:#66B2F2;border-color:rgba(102,178,242,.55);} .ev-head.acc-sky .ev-title .hl{color:#66B2F2;} .ev-head.acc-sky::before{background:#66B2F2;}
+  .ev-head.acc-lav .ev-label{color:#B49BF2;border-color:rgba(180,155,242,.55);} .ev-head.acc-lav .ev-title .hl{color:#B49BF2;} .ev-head.acc-lav::before{background:#B49BF2;}
+  .ev-head.acc-gold .ev-label{color:#E6C572;border-color:rgba(230,197,114,.55);} .ev-head.acc-gold .ev-title .hl{color:#E6C572;} .ev-head.acc-gold::before{background:#E6C572;}
+
+  /* 섹션별 배경 밴드 (화면 전체 너비, 경계에서 딱 잘림) */
+  .band{position:relative;padding:34px 16px 40px;}
+  .band > *{position:relative;z-index:1;}
+  .band::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:0;}
+  .band .ev-head{margin-top:0;}
+  .band-amber::before{background:radial-gradient(135% 72% at 50% 0%, rgba(234,181,76,.06), #0a0a0c 56%);}
+  .band-emerald::before{background:radial-gradient(135% 72% at 50% 0%, rgba(79,207,152,.055), #0a0a0c 56%);}
+  .band-gold::before{background:radial-gradient(135% 72% at 50% 0%, rgba(230,197,114,.06), #0a0a0c 56%);}
+  .band-sky::before{background:radial-gradient(135% 72% at 50% 0%, rgba(102,178,242,.055), #0a0a0c 56%);}
+  .band-lav::before{background:radial-gradient(135% 72% at 50% 0%, rgba(180,155,242,.055), #0a0a0c 56%);}
+
+  /* ============ 고정 골드 CTA + 번호 입력 모달 ============ */
+  .fb-cta{position:relative;overflow:hidden;width:100%;padding:16px;font-size:15.5px;font-weight:800;border-radius:14px;background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .fb-cta span{font-size:17px;}
+  @media (prefers-reduced-motion:no-preference){ .fb-cta::after{content:"";position:absolute;top:-10%;left:0;width:26%;height:120%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.6s ease-in-out infinite;pointer-events:none;} }
+  .fbmodal{position:fixed;inset:0;z-index:95;display:none;}
+  .fbmodal.show{display:block;}
+  .fbm-dim{position:absolute;inset:0;background:rgba(0,0,0,.64);backdrop-filter:blur(2px);}
+  .fbm-card{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:480px;background:#15131d;border:1px solid rgba(230,197,114,.25);border-radius:22px 22px 0 0;padding:24px 20px calc(26px + env(safe-area-inset-bottom));box-shadow:0 -22px 60px rgba(0,0,0,.7);}
+  @keyframes slideUp{from{transform:translateX(-50%) translateY(34px);}to{transform:translateX(-50%) translateY(0);}}
+  @media (prefers-reduced-motion:no-preference){ .fbmodal.show .fbm-card{animation:slideUp .3s ease;} }
+  .fbm-x{position:absolute;right:14px;top:12px;background:none;color:var(--muted);font-size:19px;line-height:1;padding:6px;}
+  .fbm-t{font-size:18px;font-weight:800;color:#F2ECDE;}
+  .fbm-d{font-size:13px;color:var(--muted);margin:6px 0 16px;}
+  .fbmodal .fb-row{display:block;}
+  .fbmodal .fb-row input{width:100%;}
+  .fbmodal .fb-consent{margin-top:12px;justify-content:flex-start;}
+  .fbmodal .fb-submit{width:100%;margin-top:14px;padding:15px;}
+
+  /* ============ EVENT 1 — 레퍼런스 EVENT 3 스타일 ============ */
+  .ev1-graphic{position:relative;margin:6px 6px 0;}
+  .ev1-graphic .listpeek{border-color:rgba(230,197,114,.4);box-shadow:0 14px 36px rgba(0,0,0,.5);}
+  .circbadge{position:absolute;top:-13px;right:-5px;width:66px;height:66px;border-radius:50%;background:linear-gradient(140deg,#F4EAC8,#E6C572);color:#2a2008;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;line-height:1.15;box-shadow:0 8px 22px rgba(0,0,0,.5);z-index:3;}
+  .circbadge b{font-size:16px;font-weight:900;}
+  .ev1-cap{text-align:center;font-size:16.5px;font-weight:800;color:var(--gold);margin-top:22px;}
+  .ev1-sub{text-align:center;font-size:12.5px;color:var(--muted);margin-top:5px;margin-bottom:18px;}
+  .ev1-steps{background:#100f15;border:1px solid var(--line);border-radius:16px;padding:19px;display:flex;flex-direction:column;gap:14px;}
+  .ev1-steps .mls b{color:var(--gold);}
+  .ev1-steps .mls-n{background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;}
+  .ev1-steps{margin-top:18px;}
+  .ev1-note{text-align:center;font-size:12px;color:var(--muted);margin:14px 4px 0;}
 </style>
 </head>
 <body>
@@ -288,8 +569,7 @@
 <header class="topbar">
   <div class="bar-inner">
     <div class="logo">
-      <svg width="26" height="20" viewBox="0 0 26 20" fill="none"><path d="M2 18C4.5 9 7.5 4 10 4c2.2 0 3.6 3.4 5 7.5C21 18 22.5 18 24 18H2Z" fill="#2C5A3F"/><circle cx="18.5" cy="6.5" r="2.4" fill="#4A8062"/></svg>
-      <span>eat<span class="dot">.</span>around</span>
+      <img src="images/logo-green.png" alt="이더라운드" />
     </div>
     <span class="dday">🎁 마감 <b id="dday">D-45</b></span>
   </div>
@@ -302,48 +582,76 @@
     <div class="hero-photo"></div>
     <div class="hero-shade"></div>
     <div class="hero-body">
-      <span class="hero-badge">🌿 레퍼럴 프로모션 2026</span>
+      <div class="hero-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <span class="hero-badge">🏆 레퍼럴 프로모션 2026</span>
       <h1>번호만 남겨도<br><span class="hl">제주 맛집 지도 무료</span></h1>
-      <p>추천하면 <b>제주 항공권·5성급 호텔</b>까지 — 지금 참여하세요.</p>
+      <p>추천하면 <b>제주 항공권·로컬 숙소</b>까지 — 아래에서 번호만 남기면 시작.</p>
 
-      <div class="capture">
-        <div class="capture-hook">🎁 번호 남기고 시작하기<span>30초면 끝</span></div>
-        <div class="cap-row">
-          <input id="hPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="off" />
-          <button class="cap-btn" id="hSubmit" disabled>참여하기</button>
-        </div>
-        <label class="cap-consent" for="hAgree">
-          <input type="checkbox" id="hAgree" />
-          <span class="box"></span>
-          <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 · 이벤트·혜택 안내</span>
-        </label>
-        <div class="cap-trust">
-          <span>👥 이미 <b>312명</b> 참여 중</span><i></i><span>🎁 혜택 <b>단 10명</b></span><i></i><span>⏱ 마감 <b>D-<span id="ddayHero">39</span></b></span>
-        </div>
+      <div class="hero-trust">
+        <span>👥 이미 <b><span class="cu" data-to="312">0</span>명</b> 참여 중</span><i></i><span>🎁 혜택 <b>단 <span class="cu" data-to="10">0</span>명</b></span><i></i><span>⏱ 마감 <b>D-<span id="ddayHero">39</span></b></span>
       </div>
+      <div class="scrolldown">아래로 내려보세요<span class="ch">⌄</span></div>
     </div>
   </section>
+
+  <!-- EVENT 1 -->
+  <div class="band band-amber">
+  <div class="ev-head acc-amber">
+    <span class="ev-label">EVENT 1</span>
+    <h2 class="ev-title">참여만 해도 <span class="hl">제주 맛집 리스트</span></h2>
+    <p class="ev-sub">번호만 남기면 제주 로컬 맛집 지도를 바로 보내드려요.</p>
+  </div>
+
+  <!-- 맛집 리스트 (참여 보상) — 바깥 박스 없이 -->
+  <section class="ev1-wrap">
+      <!-- 맛집 리스트 그래픽 + 원형 배지 (레퍼런스 EVENT 3 스타일) -->
+      <div class="ev1-graphic">
+        <div class="listpeek">
+          <div class="listpeek-doc" aria-hidden="true">
+            <div class="lp-h">🍴 제주 로컬 맛집 리스트</div>
+            <div class="lp-row"><span class="lp-no">01</span><span class="lp-nm">○○○ 흑돼지 노포</span><span class="lp-meta">제주시 · ★ 4.9</span></div>
+            <div class="lp-row"><span class="lp-no">02</span><span class="lp-nm">○○ 고기국수</span><span class="lp-meta">노형동 · ★ 4.8</span></div>
+            <div class="lp-row"><span class="lp-no">03</span><span class="lp-nm">○○ 물회 맛집</span><span class="lp-meta">서귀포 · ★ 4.8</span></div>
+            <div class="lp-row"><span class="lp-no">04</span><span class="lp-nm">○○ 오션뷰 카페</span><span class="lp-meta">애월 · ★ 4.7</span></div>
+            <div class="lp-row"><span class="lp-no">05</span><span class="lp-nm">○○ 로컬 베이커리</span><span class="lp-meta">구좌 · ★ 4.9</span></div>
+          </div>
+        </div>
+        <span class="circbadge">전원<br><b>무료</b></span>
+      </div>
+      <!-- 다크 스텝 카드 -->
+      <div class="ev1-steps">
+        <div class="mls"><span class="mls-n">1</span><span>맛집 리스트 받을 번호를 남겨요.</span></div>
+        <div class="mls"><span class="mls-n">2</span><span>알림톡으로 <b>맛집 리스트 + 내 추천 링크</b>가 도착해요.</span></div>
+        <div class="mls"><span class="mls-n">3</span><span>받은 링크를 주변에 공유 → <b>친구가 신청할수록 순위 ↑</b> → 상위 10명 경품!</span></div>
+      </div>
+      <p class="ev1-note">* 모든 사람에게 맛집리스트가 공유됩니다.</p>
+  </section>
+
+  <!-- EVENT 2 -->
+  </div>
+
+  <div class="band band-emerald">
+  <div class="ev-head acc-emerald">
+    <span class="ev-label">EVENT 2</span>
+    <h2 class="ev-title">고유 링크 공유하고 <span class="hl">경품</span> 받기</h2>
+    <p class="ev-sub">알림톡으로 받은 내 링크를 친구에게 공유하면, 순위에 따라 제주 항공권·로컬 숙소까지.</p>
+    <div class="winbadge">🏆 상위 10명에게 지급</div>
+  </div>
 
   <!-- 혜택 -->
   <section class="card benefits">
     <div class="pad">
-      <p class="sec-label">🎁 REWARD</p>
-      <h2 class="sec-title">순위 혜택<span class="sub">2주 종료 후 순위에 따라 지급돼요.</span></h2>
       <div class="grand">
-        <div class="grand-card"><div class="grand-img" style="background-image:url('images/prize-hotel.jpg')"></div><div class="grand-cap"><b>1등</b> 제주 5성급 호텔 1박</div></div>
+        <div class="grand-card"><div class="grand-img" style="background-image:url('images/prize-hotel.jpg')"></div><div class="grand-cap"><b>1등</b> 제주 로컬 숙소 1박</div></div>
         <div class="grand-card silver"><div class="grand-img" style="background-image:url('images/prize-flight.jpg')"></div><div class="grand-cap"><b>2등</b> 제주 왕복 항공권</div></div>
       </div>
-      <div class="prize"><div class="medal-ic m1">1</div><div class="info"><div class="t">제주 5성급 호텔 스탠다드 1박권</div><div class="r">1등</div></div><div class="ppl">1명</div></div>
+      <div class="prize"><div class="medal-ic m1">1</div><div class="info"><div class="t">제주 로컬 숙소 1박권</div><div class="r">1등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m2">2</div><div class="info"><div class="t">제주 왕복 항공권</div><div class="r">2등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m3">3</div><div class="info"><div class="t">리몬첼로 만들기 프로그램 체험권 <span class="cap">2인</span></div><div class="r">3등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m4">4</div><div class="info"><div class="t">찹쌀 막걸리 전통주 프로그램 체험권 <span class="cap">2인</span></div><div class="r">4등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m5">5</div><div class="info"><div class="t">제주 곶자왈 테라리움 디저트 프로그램 체험 <span class="cap">2인</span></div><div class="r">5등</div></div><div class="ppl">1명</div></div>
       <div class="prize"><div class="medal-ic m5">6~</div><div class="info"><div class="t">제주 로컬 카페권</div><div class="r">6~10등</div></div><div class="ppl">5명</div></div>
 
-      <div class="allreward">
-        <span class="em">🗺️</span>
-        <div><div class="t">참여자 전원, 제주 로컬 맛집 지도</div><div class="d">링크를 만든 모든 분께 PDF로 드려요.</div></div>
-      </div>
     </div>
   </section>
 
@@ -352,7 +660,7 @@
     <div class="pad">
       <!-- 입력 상태 -->
       <div class="form" id="refForm">
-        <p class="sec-label">STEP 1</p>
+        <p class="sec-label">참여</p>
         <h2 class="sec-title">내 추천 링크 만들기<span class="sub">닉네임과 연락처를 남기면 나만의 링크가 생성돼요.</span></h2>
         <div class="field">
           <label for="nick">닉네임</label>
@@ -390,6 +698,24 @@
     </div>
   </section>
 
+  </div>
+
+  <!-- 실시간 순위 (별도 섹션) -->
+  <div class="band band-gold">
+  <div class="ev-head acc-gold">
+    <span class="ev-label">RANKING</span>
+    <h2 class="ev-title">실시간 <span class="hl">순위</span></h2>
+    <p class="ev-sub">지인이 정보를 남길수록 순위가 올라가요.</p>
+  </div>
+
+  <!-- 실시간 참여 피드 -->
+  <section class="card">
+    <div class="livefeed">
+      <span class="lf-badge"><span class="lf-dot"></span>LIVE</span>
+      <span class="lf-msg" id="liveFeedMsg">🎉 방금 <b>제주러버</b>님이 참여했어요</span>
+    </div>
+  </section>
+
   <!-- 리더보드 -->
   <section class="card board">
     <div class="pad">
@@ -398,18 +724,51 @@
         <span>실시간 순위<span class="sub">지인이 정보를 남긴 수 기준</span></span>
         <span class="live"><span class="ping"></span>LIVE</span>
       </h2>
+      <div class="ltabs">
+        <div class="ltab on">실시간 순위</div>
+        <div class="ltab">누적 순위</div>
+      </div>
       <div id="boardList"></div>
     </div>
   </section>
 
-  <!-- 참여방법 -->
-  <section class="card howto">
+  <!-- 순위 산정 방식 -->
+  <section class="card">
     <div class="pad">
-      <p class="sec-label">HOW TO</p>
-      <h2 class="sec-title">참여 방법</h2>
-      <div class="step"><div class="num">1</div><div class="tx"><b>닉네임·연락처</b>를 남기고 내 추천 링크를 받아요.</div></div>
-      <div class="step"><div class="num">2</div><div class="tx">링크를 <b>지인에게 공유</b>해요. (카톡·문자·SNS)</div></div>
-      <div class="step"><div class="num">3</div><div class="tx">지인이 정보를 남기면 <b>내 순위가 올라가요</b> 🎉</div></div>
+      <div class="infobox">
+        <div class="ib-t">⚖️ 순위는 이렇게 매겨져요</div>
+        <ul>
+          <li>내 링크로 들어온 지인이 남긴 <b>유효 정보(이름·연락처) 수</b>로 순위가 정해져요.</li>
+          <li>같은 사람이 여러 번 남겨도 순위에는 <b>1회만</b> 반영돼요. (중복·셀프 입력 방지)</li>
+          <li>리더보드에는 <b>닉네임</b>으로만 표시되고, 실명·연락처는 공개되지 않아요.</li>
+          <li>상위 당첨자는 지급 전 <b>제출 내역 확인</b> 절차를 거쳐요.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 안내 -->
+  </div>
+
+  <div class="band band-sky">
+  <div class="ev-head acc-sky">
+    <span class="ev-label">진행 안내</span>
+    <h2 class="ev-title">이렇게 <span class="hl">진행</span>돼요</h2>
+    <p class="ev-sub">모집부터 당첨자 발표까지 한눈에.</p>
+  </div>
+
+  <!-- 진행 일정 -->
+  <section class="card">
+    <div class="pad">
+      <div class="infobox">
+        <div class="ib-t">📅 진행 일정</div>
+        <div class="sched">
+          <div class="sched-row"><div class="sched-when">모집</div><div class="sched-what">메타·인스타·문자로 참여자 모집</div></div>
+          <div class="sched-row"><div class="sched-when">D-day</div><div class="sched-what">참여자에게 고유 링크 발송 → 프로모션 시작</div></div>
+          <div class="sched-row"><div class="sched-when">2주간</div><div class="sched-what">실시간 리더보드 운영 · 중간 순위 알림</div></div>
+          <div class="sched-row"><div class="sched-when">종료 +3일</div><div class="sched-what">순위 확정 → 당첨자 알림톡 안내 · 결과 발표</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -425,6 +784,48 @@
     </ul>
   </section>
 
+  </div>
+
+  <!-- 알림 신청 배너 (레퍼런스 section_banner) -->
+  <section class="card promo-banner">
+    <div>
+      <div class="pb-t">마감 전, 순위 알림 받기</div>
+      <div class="pb-d">2주 동안 내 순위 변동을 놓치지 않게 알려드려요.</div>
+    </div>
+    <button class="pb-btn">🔔 알림 신청</button>
+  </section>
+
+  <!-- FAQ (레퍼런스 section_noti) -->
+  <div class="band band-lav">
+  <div class="ev-head acc-lav">
+    <span class="ev-label">FAQ</span>
+    <h2 class="ev-title">자주 묻는 <span class="hl">질문</span></h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">맛집 지도는 언제 받나요?<span class="chev">⌄</span></div>
+      <div class="faq-a"><div class="faq-a-in">번호를 남기면 <b>알림톡으로 즉시</b> 제주 로컬 맛집 지도 PDF가 발송돼요. 별도 신청·구매 없이 참여 즉시 받습니다.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">추천 링크는 어디서 받나요?<span class="chev">⌄</span></div>
+      <div class="faq-a"><div class="faq-a-in">참여 시 <b>알림톡으로 내 고유 링크</b>가 함께 도착해요. 페이지에서 닉네임을 입력해 바로 만들 수도 있어요.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">순위는 어떻게 정해지나요?<span class="chev">⌄</span></div>
+      <div class="faq-a"><div class="faq-a-in">내 링크로 들어온 지인이 남긴 <b>유효 정보 수</b>로 정해져요. 같은 사람이 여러 번 남겨도 순위엔 1회만 반영됩니다.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">당첨자는 언제 발표되나요?<span class="chev">⌄</span></div>
+      <div class="faq-a"><div class="faq-a-in">프로모션 종료 <b>+3일</b>에 순위를 확정해, 상위 10명에게 <b>알림톡으로 개별 안내</b>드려요.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">개인정보는 어떻게 사용되나요?<span class="chev">⌄</span></div>
+      <div class="faq-a"><div class="faq-a-in">수집한 정보는 <b>이벤트 안내·당첨 연락</b> 용도로만 사용돼요. 리더보드엔 닉네임만 표시되고 실명·연락처는 공개되지 않습니다.</div></div>
+    </div>
+  </div>
+
+  </div>
+
   <footer>
     <div class="fl">eat.around</div>
     <div>가장 제주다운 여행, 이더라운드</div>
@@ -433,24 +834,34 @@
 
 </main>
 
-<!-- 하단 플로팅 번호 입력 배너 -->
+<!-- 하단 고정 골드 CTA (레퍼런스 스타일) -->
 <div class="floatbar" id="floatBar" style="display:none">
   <div class="fb-inner">
+    <button class="fb-cta" id="fbOpen" onclick="document.querySelector('.ref').scrollIntoView({behavior:'smooth',block:'center'})">이벤트 참여하기 <span>→</span></button>
+  </div>
+</div>
+
+<!-- 번호 입력 모달 -->
+<div class="fbmodal" id="fbModal">
+  <div class="fbm-dim" onclick="document.getElementById('fbModal').classList.remove('show')"></div>
+  <div class="fbm-card">
+    <button class="fbm-x" onclick="document.getElementById('fbModal').classList.remove('show')" aria-label="닫기">✕</button>
     <div id="fbForm">
-      <div class="fb-hook">🎁 번호만 남겨도 <b>제주 로컬 맛집 지도</b>를 드려요</div>
+      <div class="fbm-t">번호 남기고 시작하기</div>
+      <div class="fbm-d">번호만 남기면 제주 로컬 맛집 지도를 바로 보내드려요.</div>
       <div class="fb-row">
         <input id="fbPhone" type="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" autocomplete="off" />
-        <button class="fb-submit" id="fbSubmit" disabled>번호 제출</button>
       </div>
       <label class="fb-consent" for="fbAgree">
         <input type="checkbox" id="fbAgree" />
         <span class="box"></span>
         <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 · 이벤트·혜택 안내</span>
       </label>
+      <button class="fb-submit" id="fbSubmit" disabled>번호 제출하고 시작하기</button>
     </div>
     <div id="fbDone" style="display:none">
       <div class="fb-done">🎉 번호가 등록됐어요! 맛집 지도를 보내드릴게요.</div>
-      <button class="fb-next" id="fbNext">내 추천 링크 받고 순위 도전하기 →</button>
+      <button class="fb-next" id="fbNext" onclick="document.getElementById('fbModal').classList.remove('show')">내 추천 링크 받고 순위 도전하기 →</button>
     </div>
   </div>
 </div>
@@ -669,25 +1080,7 @@
     $('fbForm').style.display = 'block';
   }
 
-  /* ===== 히어로 번호 캡처 ===== */
-  var hPhone = $('hPhone'), hAgree = $('hAgree'), hSubmit = $('hSubmit');
-  hPhone.addEventListener('input', function(){
-    var v = hPhone.value.replace(/[^0-9]/g,'').slice(0,11);
-    if(v.length < 4){ hPhone.value = v; }
-    else if(v.length < 8){ hPhone.value = v.slice(0,3)+'-'+v.slice(3); }
-    else { hPhone.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7); }
-    hPhone.classList.remove('err');
-  });
-  hAgree.addEventListener('change', function(){ hSubmit.disabled = !hAgree.checked; });
-  hSubmit.addEventListener('click', function(){
-    var ph = hPhone.value.trim();
-    if(!/^010-\d{4}-\d{4}$/.test(ph)){ hPhone.classList.add('err'); toast('연락처를 010-0000-0000 형식으로 입력해 주세요.'); return; }
-    if(!hAgree.checked){ return; }
-    $('phone').value = ph; agree.checked = true; makeBtn.disabled = false; $('formHint').classList.remove('err');
-    toast('번호 등록 완료! 🎉 닉네임만 정하면 끝이에요.');
-    document.querySelector('.ref').scrollIntoView({behavior:'smooth', block:'center'});
-    setTimeout(function(){ $('nick').focus(); }, 500);
-  });
+  /* (미리보기) 히어로 번호 캡처 제거 — 하단 플로팅 배너로 대체 */
 
   /* ===== 플로팅 배너 노출 제어 (히어로 지나면 등장) ===== */
   var participated = false;
@@ -717,6 +1110,53 @@
     }
   }
   init();
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $$=function(s,c){return [].slice.call((c||document).querySelectorAll(s));};
+
+  /* 스크롤 리빌 (히어로 제외) */
+  var rev=$$('.ev-head, main section, .faq-item').filter(function(e){return !e.classList.contains('hero');});
+  rev.forEach(function(e){e.classList.add('reveal');});
+  if(reduce || !('IntersectionObserver' in window)){ rev.forEach(function(e){e.classList.add('in');}); }
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+    rev.forEach(function(e){io.observe(e);});
+    setTimeout(function(){ rev.forEach(function(e){ if(e.getBoundingClientRect().top < window.innerHeight*0.95){ e.classList.add('in'); } }); }, 50);
+  }
+
+  /* 숫자 카운트업 */
+  function cu(el){ var to=parseInt(el.getAttribute('data-to'),10)||0; if(reduce){el.textContent=to;return;} var t0=null; function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1);el.textContent=Math.floor(p*to);if(p<1)requestAnimationFrame(st);} requestAnimationFrame(st); }
+  $$('.cu').forEach(function(el){
+    if('IntersectionObserver' in window && !reduce){ var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){cu(en.target);o.unobserve(en.target);}});},{threshold:.6}); o.observe(el); }
+    else cu(el);
+  });
+
+  /* 리더보드 진행 바 + 카운트업 */
+  var board=document.getElementById('boardList');
+  if(board){
+    var rows=$$('.row',board), max=0, info=[];
+    rows.forEach(function(r){var c=r.querySelector('.cnt'); var n=c?parseInt((c.textContent||'').replace(/[^0-9]/g,''),10):0; if(n>max)max=n; info.push({r:r,c:c,n:n});});
+    info.forEach(function(d){ var b=document.createElement('div'); b.className='rankbar'; d.r.insertBefore(b,d.r.firstChild); d.bar=b; if(d.c){ var sp=d.c.querySelector('span'); d.suffix=sp?sp.outerHTML:'명'; } });
+    function fill(){ info.forEach(function(d){
+      d.bar.style.width = (reduce||max<=0)?'0':Math.max(7,(d.n/max*100))+'%';
+      if(d.c && !reduce){ var t0=null; (function(c,to,sfx){ function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/950,1);c.innerHTML=Math.floor(p*to)+sfx;if(p<1)requestAnimationFrame(st);} requestAnimationFrame(st); })(d.c,d.n,d.suffix); }
+    }); }
+    var host=board.closest('.card')||board;
+    if(reduce || !('IntersectionObserver' in window)){ fill(); }
+    else{ var bo=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){fill();bo.disconnect();}});},{threshold:.15}); bo.observe(host); }
+  }
+
+  /* 실시간 참여 피드 */
+  var feed=['🎉 방금 <b>제주러버</b>님이 참여했어요','🔥 <b>바다왕</b>님이 친구 3명을 모았어요','📈 <b>돌하르방</b>님이 5위로 올라섰어요','🗺️ <b>감귤조아</b>님이 맛집 지도를 받았어요','✨ <b>오름지기</b>님이 방금 링크를 공유했어요','🙌 <b>해녀의꿈</b>님이 친구를 초대했어요'];
+  var fm=document.getElementById('liveFeedMsg'), fi=1;
+  if(fm){ setInterval(function(){ fm.style.opacity=0; setTimeout(function(){ fm.innerHTML=feed[fi%feed.length]; fm.style.opacity=1; fi++; },260); }, 2900); }
+
+  /* 순위 필터 탭(시각) */
+  $$('.ltab').forEach(function(t){ t.addEventListener('click',function(){ $$('.ltab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); }); });
 })();
 </script>
 </body>
