@@ -383,18 +383,26 @@
   .hero-shade{background:radial-gradient(78% 48% at 50% 24%, rgba(185,138,50,.42), rgba(10,9,12,0) 60%), linear-gradient(180deg,rgba(8,7,9,.62) 0%,rgba(8,7,9,.5) 38%,rgba(8,7,9,.9) 78%,rgba(7,6,8,1) 100%);}
   .hero-body{text-align:center;}
   .hero-stars{color:var(--gold);font-size:16px;letter-spacing:7px;margin-bottom:14px;text-shadow:0 0 20px rgba(230,197,114,.6);}
-  /* 3D 회전 황금 지도 메달 */
-  .mapcoin{position:relative;width:106px;height:106px;margin:0 auto 12px;perspective:640px;animation:coinbob 4.4s ease-in-out infinite;}
-  .mapcoin::before{content:"";position:absolute;left:50%;top:50%;width:165%;height:165%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,197,114,.32) 0%,rgba(230,197,114,.10) 42%,transparent 66%);z-index:-1;pointer-events:none;}
-  .mapcoin-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:coinspin 8s linear infinite;will-change:transform;}
-  .mapcoin-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 36% 30%, #FCEBB6 0%, #EBCE7C 33%, #D2A648 59%, #9E7228 83%, #6E4E1C 100%);box-shadow:inset 0 0 0 4px rgba(120,86,30,.45), inset 0 3px 10px rgba(255,245,210,.55), inset 0 -9px 16px rgba(80,52,14,.5), 0 14px 30px rgba(0,0,0,.55);}
-  .mapcoin-face.back{transform:rotateY(180deg);}
-  .mapcoin-face>svg{position:absolute;inset:0;width:100%;height:100%;}
-  .mapcoin-shine{position:absolute;inset:0;border-radius:50%;background:linear-gradient(118deg,transparent 32%,rgba(255,255,255,.5) 48%,transparent 62%);pointer-events:none;}
-  @keyframes coinspin{from{transform:rotateX(13deg) rotateY(0deg);}to{transform:rotateX(13deg) rotateY(360deg);}}
-  @keyframes coinbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
-  @media (min-width:480px){.mapcoin{width:124px;height:124px;}}
-  @media (prefers-reduced-motion:reduce){.mapcoin,.mapcoin-in{animation:none;}.mapcoin-in{transform:rotateX(13deg) rotateY(-20deg);}}
+  /* 3D 회전 황금 접이식 지도 */
+  .fmap{position:relative;width:104px;height:90px;margin:0 auto 14px;perspective:760px;animation:mapbob 4.6s ease-in-out infinite;}
+  .fmap::before{content:"";position:absolute;left:50%;top:50%;width:180%;height:180%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,197,114,.34) 0%,rgba(230,197,114,.10) 44%,transparent 68%);z-index:-1;pointer-events:none;}
+  .fmap-rot{position:absolute;inset:0;transform-style:preserve-3d;animation:mapspin 7.5s linear infinite;will-change:transform;}
+  .panel{position:absolute;top:6px;width:34px;height:74px;transform-style:preserve-3d;border-radius:3px;
+    background:
+      linear-gradient(118deg, transparent 38%, rgba(255,250,222,.55) 40%, rgba(255,250,222,.55) 44%, transparent 46%),
+      repeating-linear-gradient(90deg, transparent 0 6.5px, rgba(120,86,30,.28) 6.5px 7.5px),
+      repeating-linear-gradient(0deg, transparent 0 6.5px, rgba(150,112,42,.22) 6.5px 7.5px),
+      linear-gradient(135deg, #FCEBB2 0%, #E8CB78 46%, #C99A3A 100%);
+    box-shadow:inset 0 0 0 1px rgba(120,86,30,.45), 0 0 16px rgba(0,0,0,.3);}
+  .panel.p1{left:14px;transform-origin:left center;transform:rotateY(33deg);}
+  .panel.p2{left:100%;top:0;transform-origin:left center;transform:rotateY(-66deg);filter:brightness(1.08);}
+  .panel.p3{left:100%;top:0;transform-origin:left center;transform:rotateY(66deg);filter:brightness(.9);}
+  .panel .pin{position:absolute;left:50%;top:42%;width:14px;height:14px;transform:translate(-50%,-60%) rotate(-45deg);border-radius:50% 50% 50% 0;background:radial-gradient(circle at 50% 38%, #9a6322, #5b3d14);box-shadow:0 3px 6px rgba(0,0,0,.45);}
+  .panel .pin::after{content:"";position:absolute;left:50%;top:40%;width:5px;height:5px;transform:translate(-50%,-50%) rotate(45deg);border-radius:50%;background:#FBE7AE;}
+  @keyframes mapspin{from{transform:rotateX(11deg) rotateY(0deg);}to{transform:rotateX(11deg) rotateY(360deg);}}
+  @keyframes mapbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+  @media (min-width:480px){.fmap{width:120px;height:104px;}.panel{width:34px;height:92px;}}
+  @media (prefers-reduced-motion:reduce){.fmap,.fmap-rot{animation:none;}.fmap-rot{transform:rotateX(11deg) rotateY(-22deg);}}
   .hero-badge{background:rgba(230,197,114,.12);border-color:rgba(230,197,114,.5);color:#F0DCA0;}
   .hero h1{font-size:40px;line-height:1.2;color:#E6C572;background:linear-gradient(180deg,#FCEBB2 0%,#E8C76C 48%,#BC8B33 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 2px 22px rgba(230,197,114,.28);}
   .hero h1 .hl{-webkit-text-fill-color:transparent;color:#E6C572;}
@@ -603,29 +611,12 @@
     <div class="hero-photo"></div>
     <div class="hero-shade"></div>
     <div class="hero-body">
-      <div class="mapcoin" aria-hidden="true">
-        <div class="mapcoin-in">
-          <div class="mapcoin-face front">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M16,53 C16,41 30,33 50,32 C70,31 85,41 84,53 C84,64 70,72 50,72 C30,72 16,65 16,53 Z" fill="#6e4d1c" fill-opacity=".30"/>
-              <path d="M16,53 C16,41 30,33 50,32 C70,31 85,41 84,53 C84,64 70,72 50,72 C30,72 16,65 16,53 Z" stroke="#5b3d14" stroke-opacity=".55" stroke-width="1.3"/>
-              <path d="M35,59 Q44,44 53,49 Q61,53 65,62" stroke="#5b3d14" stroke-width="1.7" stroke-dasharray="2.4 3.2" stroke-linecap="round" opacity=".9"/>
-              <g transform="translate(35,59)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-              <g transform="translate(53,49)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-              <g transform="translate(65,62)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-            </svg>
-            <span class="mapcoin-shine"></span>
-          </div>
-          <div class="mapcoin-face back">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M16,53 C16,41 30,33 50,32 C70,31 85,41 84,53 C84,64 70,72 50,72 C30,72 16,65 16,53 Z" fill="#6e4d1c" fill-opacity=".30"/>
-              <path d="M16,53 C16,41 30,33 50,32 C70,31 85,41 84,53 C84,64 70,72 50,72 C30,72 16,65 16,53 Z" stroke="#5b3d14" stroke-opacity=".55" stroke-width="1.3"/>
-              <path d="M35,59 Q44,44 53,49 Q61,53 65,62" stroke="#5b3d14" stroke-width="1.7" stroke-dasharray="2.4 3.2" stroke-linecap="round" opacity=".9"/>
-              <g transform="translate(35,59)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-              <g transform="translate(53,49)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-              <g transform="translate(65,62)"><path d="M0,0 C-3.4,-4.2 -5.2,-6.4 -5.2,-9.4 A5.2,5.2 0 1 1 5.2,-9.4 C5.2,-6.4 3.4,-4.2 0,0 Z" fill="#5b3d14"/><circle cx="0" cy="-9.4" r="2" fill="#FBE7AE"/></g>
-            </svg>
-            <span class="mapcoin-shine"></span>
+      <div class="fmap" aria-hidden="true">
+        <div class="fmap-rot">
+          <div class="panel p1">
+            <div class="panel p2"><span class="pin"></span>
+              <div class="panel p3"></div>
+            </div>
           </div>
         </div>
       </div>
