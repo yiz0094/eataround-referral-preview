@@ -514,11 +514,8 @@
   /* ============ 섹션별 액센트 컬러 ============ */
   .ev-head{position:relative;}
   .ev-head::before{content:"";position:absolute;left:50%;top:-24px;transform:translateX(-50%);width:240px;height:104px;border-radius:50%;filter:blur(34px);opacity:.2;z-index:-1;pointer-events:none;}
-  .ev-head.acc-amber .ev-label{color:#EAB54C;border-color:rgba(234,181,76,.55);} .ev-head.acc-amber .ev-title .hl{color:#EAB54C;} .ev-head.acc-amber::before{background:#EAB54C;}
-  .ev-head.acc-emerald .ev-label{color:#4FCF98;border-color:rgba(79,207,152,.55);} .ev-head.acc-emerald .ev-title .hl{color:#4FCF98;} .ev-head.acc-emerald::before{background:#4FCF98;}
-  .ev-head.acc-sky .ev-label{color:#66B2F2;border-color:rgba(102,178,242,.55);} .ev-head.acc-sky .ev-title .hl{color:#66B2F2;} .ev-head.acc-sky::before{background:#66B2F2;}
-  .ev-head.acc-lav .ev-label{color:#B49BF2;border-color:rgba(180,155,242,.55);} .ev-head.acc-lav .ev-title .hl{color:#B49BF2;} .ev-head.acc-lav::before{background:#B49BF2;}
-  .ev-head.acc-gold .ev-label{color:#E6C572;border-color:rgba(230,197,114,.55);} .ev-head.acc-gold .ev-title .hl{color:#E6C572;} .ev-head.acc-gold::before{background:#E6C572;}
+  /* 텍스트 강조(라벨·헤드라인 키워드)는 골드로 통일 — 섹션 구분은 배경색으로만 */
+  .ev-head::before{background:#E6C572;}
 
   /* 섹션별 배경 밴드 (화면 전체 너비, 경계에서 딱 잘림) */
   .band{position:relative;padding:34px 16px 40px;}
