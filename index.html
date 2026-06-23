@@ -221,6 +221,18 @@
   .grand-cap{position:absolute;left:0;right:0;bottom:0;padding:18px 11px 9px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.76));color:#fff;font-size:12.5px;font-weight:700;}
   .grand-cap b{display:inline-block;background:var(--gold);color:#fff;font-size:10px;font-weight:800;padding:1px 7px;border-radius:999px;margin-right:5px;vertical-align:middle;}
   .grand-card.silver .grand-cap b{background:var(--silver);}
+  /* 경품 리스트 — 레퍼런스형(사진+번호+이름+설명) */
+  .plist{margin-top:2px;}
+  .pitem{display:flex;align-items:center;gap:16px;padding:15px 2px;}
+  .pitem + .pitem{border-top:1px solid rgba(255,255,255,.07);}
+  .pthumb{flex:none;width:116px;height:116px;border-radius:20px;overflow:hidden;background:#15161a;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+  .pthumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pbody{flex:1;min-width:0;}
+  .ptop{display:flex;align-items:baseline;gap:11px;}
+  .pno{flex:none;font-style:italic;font-weight:800;font-size:33px;line-height:1;color:#E6C572;letter-spacing:-1px;}
+  .pname{font-size:20.5px;font-weight:800;color:#F4EEE1;line-height:1.22;}
+  .psub{margin-top:7px;font-size:13.5px;color:#A39E95;font-weight:600;}
+  .pdesc{margin-top:4px;font-size:16px;color:#D9D2C4;font-weight:600;line-height:1.4;}
 
   /* ===== 참여방법 ===== */
   .step{display:flex;gap:14px;padding:11px 2px;}
@@ -638,16 +650,56 @@
   <!-- 혜택 -->
   <section class="card benefits">
     <div class="pad">
-      <div class="grand">
-        <div class="grand-card"><div class="grand-img" style="background-image:url('images/prize-hotel.jpg')"></div><div class="grand-cap"><b>1등</b> 제주 로컬 숙소 1박</div></div>
-        <div class="grand-card silver"><div class="grand-img" style="background-image:url('images/prize-flight.jpg')"></div><div class="grand-cap"><b>2등</b> 제주 왕복 항공권</div></div>
+      <div class="plist">
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-hotel.jpg" alt="제주 로컬 숙소"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">1</span><span class="pname">제주 로컬 숙소 1박권</span></div>
+            <div class="psub">1등 · 1명 선정</div>
+            <div class="pdesc">제주 감성 가득한 로컬 스테이에서의 하룻밤</div>
+          </div>
+        </div>
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-flight.jpg" alt="제주 왕복 항공권"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">2</span><span class="pname">제주 왕복 항공권</span></div>
+            <div class="psub">2등 · 1명 선정</div>
+            <div class="pdesc">지금 바로 떠나는 제주, 왕복 항공권</div>
+          </div>
+        </div>
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-limoncello.jpg" alt="리몬첼로 만들기"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">3</span><span class="pname">리몬첼로 만들기 체험권</span></div>
+            <div class="psub">3등 · 1명 선정 · 2인 체험</div>
+            <div class="pdesc">제주 감귤로 빚는 수제 리몬첼로 클래스</div>
+          </div>
+        </div>
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-makgeolli.jpg" alt="찹쌀 막걸리"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">4</span><span class="pname">찹쌀 막걸리 체험권</span></div>
+            <div class="psub">4등 · 1명 선정 · 2인 체험</div>
+            <div class="pdesc">직접 빚어보는 제주 찹쌀 전통주</div>
+          </div>
+        </div>
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-terrarium.jpg" alt="곶자왈 테라리움"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">5</span><span class="pname">곶자왈 테라리움 체험</span></div>
+            <div class="psub">5등 · 1명 선정 · 2인 체험</div>
+            <div class="pdesc">제주 곶자왈을 담은 미니 정원 테라리움</div>
+          </div>
+        </div>
+        <div class="pitem">
+          <div class="pthumb"><img src="images/prize-cafe.jpg" alt="제주 로컬 카페권"></div>
+          <div class="pbody">
+            <div class="ptop"><span class="pno">6</span><span class="pname">제주 로컬 카페권</span></div>
+            <div class="psub">6~10등 · 5명 선정</div>
+            <div class="pdesc">제주 감성 카페에서 즐기는 시그니처 음료</div>
+          </div>
+        </div>
       </div>
-      <div class="prize"><div class="medal-ic m1">1</div><div class="info"><div class="t">제주 로컬 숙소 1박권</div><div class="r">1등</div></div><div class="ppl">1명</div></div>
-      <div class="prize"><div class="medal-ic m2">2</div><div class="info"><div class="t">제주 왕복 항공권</div><div class="r">2등</div></div><div class="ppl">1명</div></div>
-      <div class="prize"><div class="medal-ic m3">3</div><div class="info"><div class="t">리몬첼로 만들기 프로그램 체험권 <span class="cap">2인</span></div><div class="r">3등</div></div><div class="ppl">1명</div></div>
-      <div class="prize"><div class="medal-ic m4">4</div><div class="info"><div class="t">찹쌀 막걸리 전통주 프로그램 체험권 <span class="cap">2인</span></div><div class="r">4등</div></div><div class="ppl">1명</div></div>
-      <div class="prize"><div class="medal-ic m5">5</div><div class="info"><div class="t">제주 곶자왈 테라리움 디저트 프로그램 체험 <span class="cap">2인</span></div><div class="r">5등</div></div><div class="ppl">1명</div></div>
-      <div class="prize"><div class="medal-ic m5">6~</div><div class="info"><div class="t">제주 로컬 카페권</div><div class="r">6~10등</div></div><div class="ppl">5명</div></div>
 
     </div>
   </section>
