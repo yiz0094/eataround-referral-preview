@@ -133,6 +133,7 @@
   .btn.kakao{background:#FAE100;color:#3A1D1D;}
   .btn.kakao:hover{background:#F2D900;}
   .btn:disabled{background:#CFD6D0;color:#fff;cursor:not-allowed;}
+  .btn-sub{font-size:12.5px;font-weight:600;opacity:.82;}
   .btn:disabled:hover{background:#CFD6D0;}
   .btn:disabled:active{transform:none;}
 
@@ -754,7 +755,7 @@
           <span class="box"></span>
           <span class="ctxt"><b>[필수]</b> 마케팅 정보 수신 동의 <span class="cmore">· 이벤트·혜택 안내를 받아요</span></span>
         </label>
-        <button class="btn" id="makeBtn" style="margin-top:6px" disabled>내 링크 만들기 →</button>
+        <button class="btn" id="makeBtn" style="margin-top:6px;flex-direction:column;gap:3px;line-height:1.2;padding:13px 16px" disabled><span>맛집 지도 무료로 받기</span><span class="btn-sub">경품 이벤트도 함께 참여 →</span></button>
       </div>
 
       <!-- 결과 상태 -->
@@ -1093,8 +1094,8 @@
     if(!agree.checked){ return; }
     if(submitting) return;
     submitting = true;
-    var btn = $('makeBtn'); var label = btn.textContent;
-    btn.disabled = true; btn.textContent = '만드는 중…';
+    var btn = $('makeBtn'); var label = btn.innerHTML;
+    btn.disabled = true; btn.innerHTML = '만드는 중…';
     fetch(WEBAPP_URL, {
       method:'POST',
       headers:{'Content-Type':'text/plain;charset=utf-8'},
@@ -1112,7 +1113,7 @@
       var h = $('formHint'); h.classList.add('err');
       h.textContent = '잠시 후 다시 시도해 주세요. (' + (e.message || '네트워크 오류') + ')';
     })
-    .then(function(){ submitting = false; btn.disabled = false; btn.textContent = label; });
+    .then(function(){ submitting = false; btn.disabled = false; btn.innerHTML = label; });
   });
 
   /* ===== 복사 ===== */
