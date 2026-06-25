@@ -818,7 +818,7 @@
         <ul>
           <li>내 링크로 들어온 지인이 남긴 <b>유효 정보(이름·연락처) 수</b>로 순위가 정해져요.</li>
           <li>같은 사람이 여러 번 남겨도 순위에는 <b>1회만</b> 반영돼요. (중복·셀프 입력 방지)</li>
-          <li>리더보드에는 <b>닉네임</b>으로만 표시되고, 실명·연락처는 공개되지 않아요.</li>
+          <li>리더보드에는 <b>닉네임 + 전화 뒷4자리</b>만 표시돼요(본인 확인용). 전체 번호·실명은 공개되지 않아요.</li>
           <li>상위 당첨자는 지급 전 <b>제출 내역 확인</b> 절차를 거쳐요.</li>
         </ul>
       </div>
@@ -854,7 +854,7 @@
   <section class="notice">
     <h3>유의사항</h3>
     <ul>
-      <li>순위는 신청 시 입력한 <b>닉네임</b>으로 표시되며, 실명은 공개되지 않아요.</li>
+      <li>순위는 <b>닉네임 + 전화 뒷4자리</b>로 표시되며(본인 확인용), 전체 번호·실명은 공개되지 않아요.</li>
       <li>같은 방문자가 여러 번 정보를 남겨도 순위에는 <b>1회만</b> 반영돼요.</li>
       <li>수집된 정보는 이벤트 안내·당첨 연락 용도로만 사용돼요.</li>
       <li>상위 당첨자는 지급 전 제출 내역을 확인하는 절차가 있어요.</li>
@@ -898,7 +898,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">개인정보는 어떻게 사용되나요?<span class="chev">⌄</span></div>
-      <div class="faq-a"><div class="faq-a-in">수집한 정보는 <b>이벤트 안내·당첨 연락</b> 용도로만 사용돼요. 리더보드엔 닉네임만 표시되고 실명·연락처는 공개되지 않습니다.</div></div>
+      <div class="faq-a"><div class="faq-a-in">수집한 정보는 <b>이벤트 안내·당첨 연락</b> 용도로만 사용돼요. 리더보드엔 <b>닉네임 + 전화 뒷4자리</b>만 표시되고(본인 확인용), 전체 번호·실명은 공개되지 않습니다.</div></div>
     </div>
   </div>
 
@@ -1038,7 +1038,7 @@
         ? '<div class="rank medal">'+medals[i]+'</div>'
         : '<div class="rank">'+rank+'</div>';
       html += '<div class="row'+(mine?' me':'')+'"><div class="rankbar" style="width:'+barW(r.cnt)+'%"></div>'+rankCell+
-        '<div class="who"><div class="nick">'+esc(r.nick)+(mine?' <span style="font-size:11px;color:var(--green-mid)">· 나</span>':'')+'</div></div>'+
+        '<div class="who"><div class="nick">'+esc(r.nick)+(r.tail?' <span style="font-size:11px;color:var(--muted);font-weight:500">('+esc(r.tail)+')</span>':'')+(mine?' <span style="font-size:11px;color:var(--green-mid)">· 나</span>':'')+'</div></div>'+
         '<div class="cnt">'+r.cnt+'<span>명</span></div></div>';
       if(rank===10){
         html += '<div class="cut">🎁 여기까지 순위 보상</div>';
@@ -1050,7 +1050,7 @@
   function loadBoard(){
     jsonp(WEBAPP_URL + '?action=leaderboard&t=' + Date.now(), function(res){
       if(res && res.ok && res.leaderboard){
-        BOARD = res.leaderboard.map(function(r){ return { nick:r.nickname, cnt:r.count, ref:r.ref }; });
+        BOARD = res.leaderboard.map(function(r){ return { nick:r.nickname, cnt:r.count, ref:r.ref, tail:r.tail }; });
         renderBoard();
       }
     });
