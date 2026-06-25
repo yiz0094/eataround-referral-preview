@@ -1116,24 +1116,30 @@
     .then(function(){ submitting = false; btn.disabled = false; btn.innerHTML = label; });
   });
 
-  /* ===== 복사 ===== */
-  function copyLink(){
+  /* ===== 공유 문구 + 복사 ===== */
+  function buildShareText(link){
+    return '🗺️ 제주 여행 맛집 고민 끝!\n\n'
+      + '번호만 남기면 제주 현지인 추천 맛집 지도(120곳+)를 무료로 받아요.\n'
+      + '지금 제주 왕복 항공권·로컬 숙소 등 경품 이벤트도 진행 중! (상위 10명)\n\n'
+      + '👇 1분이면 끝, 여기서 받기\n'
+      + link;
+  }
+  function copyShare(doneMsg){
     var url = myLink || ('https://' + $('rUrl').textContent);
+    var text = buildShareText(url);
+    var msg = doneMsg || '홍보 문구와 링크가 복사됐어요 📋 붙여넣기 해보세요!';
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(url).then(function(){ toast('링크가 복사됐어요 📋'); }, fallbackCopy);
+      navigator.clipboard.writeText(text).then(function(){ toast(msg); }, fallbackCopy);
     } else { fallbackCopy(); }
     function fallbackCopy(){
       var ta = document.createElement('textarea');
-      ta.value = url; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); toast('링크가 복사됐어요 📋'); }catch(e){ toast('복사에 실패했어요'); }
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); toast(msg); }catch(e){ toast('복사에 실패했어요'); }
       document.body.removeChild(ta);
     }
   }
-  $('copyBtn').addEventListener('click', copyLink);
-  $('shareBtn').addEventListener('click', function(){
-    copyLink();
-    toast('링크 복사 완료! 카카오톡에 붙여넣어 공유하세요 💬');
-  });
+  $('copyBtn').addEventListener('click', function(){ copyShare(); });
+  $('shareBtn').addEventListener('click', function(){ copyShare('복사 완료! 카카오톡에 붙여넣어 공유하세요 💬'); });
 
   /* ===== 다시 만들기 ===== */
   $('resetBtn').addEventListener('click', function(){
