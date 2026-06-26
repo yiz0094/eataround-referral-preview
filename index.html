@@ -404,6 +404,13 @@
   @keyframes mapbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-21px);}}
   @media (min-width:480px){.fmap{width:360px;height:312px;}.panel{width:102px;height:276px;}}
   @media (prefers-reduced-motion:reduce){.fmap,.fmap-rot{animation:none;}.fmap-rot{transform:rotateX(11deg) rotateY(-22deg);}}
+  /* 히어로 오버랩: 지도(뒤에서 회전) + 정지 텍스트(앞) */
+  .hero-body{position:relative;}
+  .hero-body .fmap{position:absolute;margin:0;left:50%;margin-left:-156px;top:48%;margin-top:-135px;z-index:0;}
+  @media (min-width:480px){.hero-body .fmap{margin-left:-180px;margin-top:-156px;}}
+  .hero-front{position:relative;z-index:2;}
+  .hero-front::before{content:"";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:112%;height:190px;max-width:540px;background:radial-gradient(ellipse at center, rgba(8,8,11,.74) 0%, rgba(8,8,11,.46) 46%, transparent 74%);z-index:-1;pointer-events:none;}
+  .hero h1{text-shadow:0 1px 3px rgba(0,0,0,.85), 0 2px 10px rgba(0,0,0,.7), 0 0 26px rgba(0,0,0,.5);}
   .hero-badge{background:rgba(230,197,114,.12);border-color:rgba(230,197,114,.5);color:#F0DCA0;}
   .hero h1{font-size:40px;line-height:1.2;color:#E6C572;background:linear-gradient(180deg,#FCEBB2 0%,#E8C76C 48%,#BC8B33 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 2px 22px rgba(230,197,114,.28);}
   .hero h1 .hl{-webkit-text-fill-color:transparent;color:#E6C572;}
@@ -621,6 +628,7 @@
           </div>
         </div>
       </div>
+      <div class="hero-front">
       <div class="hero-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
       <span class="hero-badge">🏆 레퍼럴 프로모션 2026</span>
       <h1>번호만 남겨도<br><span class="hl">제주 맛집 지도 무료</span></h1>
@@ -630,6 +638,7 @@
         <span>👥 이미 <b><span class="cu" data-to="312">0</span>명</b> 참여 중</span><i></i><span>🎁 혜택 <b>단 <span class="cu" data-to="10">0</span>명</b></span><i></i><span>⏱ 마감 <b>D-<span id="ddayHero">39</span></b></span>
       </div>
       <div class="scrolldown">아래로 내려보세요<span class="ch">⌄</span></div>
+      </div>
     </div>
   </section>
 
