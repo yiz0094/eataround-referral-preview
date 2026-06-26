@@ -385,24 +385,24 @@
   .hero-body{text-align:center;}
   .hero-stars{color:var(--gold);font-size:16px;letter-spacing:7px;margin-bottom:14px;text-shadow:0 0 20px rgba(230,197,114,.6);}
   /* 3D 회전 황금 접이식 지도 */
-  .fmap{position:relative;width:104px;height:90px;margin:0 auto 14px;perspective:760px;animation:mapbob 4.6s ease-in-out infinite;}
+  .fmap{position:relative;width:312px;height:270px;margin:0 auto 24px;perspective:2280px;animation:mapbob 4.6s ease-in-out infinite;}
   .fmap::before{content:"";position:absolute;left:50%;top:50%;width:180%;height:180%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,197,114,.34) 0%,rgba(230,197,114,.10) 44%,transparent 68%);z-index:-1;pointer-events:none;}
   .fmap-rot{position:absolute;inset:0;transform-style:preserve-3d;animation:mapspin 7.5s linear infinite;will-change:transform;}
-  .panel{position:absolute;top:6px;width:34px;height:74px;transform-style:preserve-3d;border-radius:3px;
+  .panel{position:absolute;top:18px;width:102px;height:222px;transform-style:preserve-3d;border-radius:9px;
     background:
       linear-gradient(118deg, transparent 38%, rgba(255,250,222,.55) 40%, rgba(255,250,222,.55) 44%, transparent 46%),
-      repeating-linear-gradient(90deg, transparent 0 6.5px, rgba(120,86,30,.28) 6.5px 7.5px),
-      repeating-linear-gradient(0deg, transparent 0 6.5px, rgba(150,112,42,.22) 6.5px 7.5px),
+      repeating-linear-gradient(90deg, transparent 0 19.5px, rgba(120,86,30,.28) 19.5px 22.5px),
+      repeating-linear-gradient(0deg, transparent 0 19.5px, rgba(150,112,42,.22) 19.5px 22.5px),
       linear-gradient(135deg, #FCEBB2 0%, #E8CB78 46%, #C99A3A 100%);
-    box-shadow:inset 0 0 0 1px rgba(120,86,30,.45), 0 0 16px rgba(0,0,0,.3);}
-  .panel.p1{left:14px;transform-origin:left center;transform:rotateY(33deg);}
+    box-shadow:inset 0 0 0 3px rgba(120,86,30,.45), 0 0 48px rgba(0,0,0,.3);}
+  .panel.p1{left:42px;transform-origin:left center;transform:rotateY(33deg);}
   .panel.p2{left:100%;top:0;transform-origin:left center;transform:rotateY(-66deg);filter:brightness(1.08);}
   .panel.p3{left:100%;top:0;transform-origin:left center;transform:rotateY(66deg);filter:brightness(.9);}
-  .panel .pin{position:absolute;left:50%;top:42%;width:14px;height:14px;transform:translate(-50%,-60%) rotate(-45deg);border-radius:50% 50% 50% 0;background:radial-gradient(circle at 50% 38%, #9a6322, #5b3d14);box-shadow:0 3px 6px rgba(0,0,0,.45);}
-  .panel .pin::after{content:"";position:absolute;left:50%;top:40%;width:5px;height:5px;transform:translate(-50%,-50%) rotate(45deg);border-radius:50%;background:#FBE7AE;}
+  .panel .pin{position:absolute;left:50%;top:42%;width:42px;height:42px;transform:translate(-50%,-60%) rotate(-45deg);border-radius:50% 50% 50% 0;background:radial-gradient(circle at 50% 38%, #9a6322, #5b3d14);box-shadow:0 9px 18px rgba(0,0,0,.45);}
+  .panel .pin::after{content:"";position:absolute;left:50%;top:40%;width:15px;height:15px;transform:translate(-50%,-50%) rotate(45deg);border-radius:50%;background:#FBE7AE;}
   @keyframes mapspin{from{transform:rotateX(11deg) rotateY(0deg);}to{transform:rotateX(11deg) rotateY(360deg);}}
-  @keyframes mapbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
-  @media (min-width:480px){.fmap{width:120px;height:104px;}.panel{width:34px;height:92px;}}
+  @keyframes mapbob{0%,100%{transform:translateY(0);}50%{transform:translateY(-21px);}}
+  @media (min-width:480px){.fmap{width:360px;height:312px;}.panel{width:102px;height:276px;}}
   @media (prefers-reduced-motion:reduce){.fmap,.fmap-rot{animation:none;}.fmap-rot{transform:rotateX(11deg) rotateY(-22deg);}}
   .hero-badge{background:rgba(230,197,114,.12);border-color:rgba(230,197,114,.5);color:#F0DCA0;}
   .hero h1{font-size:40px;line-height:1.2;color:#E6C572;background:linear-gradient(180deg,#FCEBB2 0%,#E8C76C 48%,#BC8B33 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 2px 22px rgba(230,197,114,.28);}
