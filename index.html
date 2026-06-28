@@ -567,29 +567,15 @@
   .band-gold::before{background:linear-gradient(180deg, #0b0b0d 0%, #1c1c1c 46%, #0b0b0d 100%);}
   .band-sky::before{background:linear-gradient(180deg, #0b0b0d 0%, #161616 50%, #0b0b0d 100%);}
   .band-lav::before{background:linear-gradient(180deg, #0b0b0d 0%, #161616 50%, #0b0b0d 100%);}
-  /* ABOUT 이더라운드 */
-  .about-wrap{max-width:600px;margin:0 auto;text-align:center;padding:0 4px;}
-  .about-lead{font-size:16px;line-height:1.78;color:#DAD3C5;margin:0 auto 20px;}
-  .about-lead b{color:var(--gold);font-weight:700;}
-  .about-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px;}
-  .about-tags span{font-size:13px;font-weight:600;color:#EBD597;background:rgba(230,197,114,.10);border:1px solid rgba(230,197,114,.30);border-radius:999px;padding:8px 14px;}
-  .about-mission{position:relative;font-size:15px;line-height:1.75;color:#C3BCB0;max-width:44ch;margin:0 auto 24px;padding:18px 20px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(230,197,114,.18);border-radius:14px;}
-  .about-mission::before{content:"\201C";position:absolute;left:14px;top:6px;font-size:32px;line-height:1;color:rgba(230,197,114,.5);font-family:Georgia,serif;}
-  .about-cta{display:inline-flex;align-items:center;gap:6px;font-size:15.5px;font-weight:800;color:#241b06;background:linear-gradient(135deg,#E8CB78,#C99A3A);padding:13px 24px;border-radius:999px;}
-  .about-cta:hover{filter:brightness(1.05);}
-  /* ABOUT 섹션: 이더라운드 브랜드 그린 */
-  .band-about::before{background:linear-gradient(180deg, #0b0b0d 0%, #2C5A3F 28%, #2C5A3F 72%, #0b0b0d 100%);}
-  .band-about .ev-label{color:#F2EEE3;border-color:rgba(242,238,227,.55);background:rgba(255,255,255,.08);}
-  .band-about .ev-title{color:#F6F2E9;}
-  .band-about .ev-title .hl{color:#F2D99A;}
-  .band-about .ev-head::before{background:#8FCBA3;}
-  .band-about .ev-sub{color:#DCE6DD;}
-  .band-about .about-lead{color:#E9E4D7;}
-  .band-about .about-lead b{color:#FFFFFF;}
-  .band-about .about-tags span{color:#27523A;background:#F1ECE0;border-color:transparent;}
-  .band-about .about-mission{background:rgba(0,0,0,.20);border-color:rgba(242,238,227,.26);color:#E4E8E1;}
-  .band-about .about-mission::before{color:rgba(242,238,227,.55);}
+  /* ABOUT 이더라운드 — TASTE LOCAL LIFE */
+  .band-about::before{background:linear-gradient(180deg, #0b0b0d 0%, #141414 50%, #0b0b0d 100%);}
+  .about2{max-width:560px;margin:0 auto;text-align:center;padding:4px 6px 0;}
+  .about-blob{width:216px;max-width:64%;height:auto;display:block;margin:0 auto 8px;}
+  .about-slogan{font-size:16px;font-weight:700;color:#8FCBA3;margin-bottom:28px;}
+  .about-text p{font-size:15px;line-height:1.72;color:#DDD7CA;margin:0 0 18px;}
+  .about-text p:last-child{margin:0;}
   .brk{display:none;}
+  @media (min-width:480px){.about-blob{width:240px;}.about-text p{font-size:16px;}}
   @media (max-width:560px){.brk{display:inline;}}
 
   /* ============ 고정 골드 CTA + 번호 입력 모달 ============ */
@@ -939,21 +925,15 @@
 
   <!-- ABOUT 이더라운드 -->
   <div class="band band-about">
-  <div class="ev-head">
-    <span class="ev-label">ABOUT</span>
-    <h2 class="ev-title">먹고, 알고, <span class="hl">경험하자</span></h2>
-    <p class="ev-sub">이더라운드는 가장 제주다운 <br class="brk">제주 여행을 만드는 <br class="brk">로컬 여행 플랫폼이에요.</p>
-  </div>
-  <section class="about-wrap">
-    <p class="about-lead">요리연구가·명인의 <b>원데이 클래스</b>부터 <br class="brk">제주 마을·양조장 투어, 파인다이닝까지 — <br class="brk">지역의 식문화를 직접 <b>먹고, 알고, <br class="brk">경험하는</b> 여행을 제안합니다.</p>
-    <div class="about-tags">
-      <span>🍳 원데이 클래스</span>
-      <span>🍶 양조장·마을 투어</span>
-      <span>🍽️ 파인다이닝</span>
-      <span>🏡 카름스테이</span>
-    </div>
-    <p class="about-mission">지속가능함을 실천하는 여행자에게 지역의 식문화를 경험할 수 있는 여행을 제공하고, 그 가치가 필요한 곳으로 흘러가길 바랍니다.</p>
-  </section>
+    <section class="about2">
+      <img class="about-blob" src="images/taste-local-life.png" alt="TASTE LOCAL LIFE">
+      <div class="about-slogan">먹고 알고 경험하자</div>
+      <div class="about-text">
+        <p>이더라운드와 함께<br>가장 제주다운 제주 여행을 떠나보세요 ✈️</p>
+        <p>요리연구가, 명인이 진행하는 <br class="brk">원데이 클래스부터<br>제주 마을, 양조장 투어와 파인다이닝까지!</p>
+        <p>지역의 식문화를 경험할 수 있는 <br class="brk">여행을 제공하고<br>필요한 곳에 가치가 흘러가길 바랍니다.</p>
+      </div>
+    </section>
   </div>
 
   <footer>
