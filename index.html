@@ -384,6 +384,8 @@
   .hero-shade{background:radial-gradient(78% 48% at 50% 24%, rgba(185,138,50,.42), rgba(10,9,12,0) 60%), linear-gradient(180deg,rgba(8,7,9,.62) 0%,rgba(8,7,9,.5) 38%,rgba(8,7,9,.9) 78%,rgba(7,6,8,1) 100%);}
   .hero-body{text-align:center;}
   .hero-stars{color:var(--gold);font-size:16px;letter-spacing:7px;margin-bottom:14px;text-shadow:0 0 20px rgba(230,197,114,.6);}
+  .hero-tagline{font-size:17px;font-weight:600;color:#EBDFC2;letter-spacing:.02em;margin-bottom:6px;text-shadow:0 1px 7px rgba(0,0,0,.78);}
+  @media (max-width:480px){.hero-tagline{font-size:15px;}}
   /* 3D 회전 황금 접이식 지도 */
   .fmap{position:relative;width:312px;height:270px;margin:0 auto 24px;perspective:2280px;animation:mapbob 4.6s ease-in-out infinite;}
   .fmap::before{content:"";position:absolute;left:50%;top:50%;width:180%;height:180%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(230,197,114,.34) 0%,rgba(230,197,114,.10) 44%,transparent 68%);z-index:-1;pointer-events:none;}
@@ -640,8 +642,8 @@
       </div>
       <div class="hero-front">
       <div class="hero-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-      <h1>마을로 떠나는 <span class="hl">제주 여행</span></h1>
-      <span class="hero-badge">〈마을 여행 기획전〉</span>
+      <div class="hero-tagline">마을로 떠나는 제주 여행</div>
+      <h1>〈마을 여행 <span class="hl">기획전</span>〉</h1>
       <p>제주 마을 로컬 맛집부터 로컬 숙소까지 <b>경품 증정</b></p>
 
       <div class="hero-trust">
