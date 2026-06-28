@@ -567,6 +567,16 @@
   .band-gold::before{background:linear-gradient(180deg, #0b0b0d 0%, #1c1c1c 46%, #0b0b0d 100%);}
   .band-sky::before{background:linear-gradient(180deg, #0b0b0d 0%, #161616 50%, #0b0b0d 100%);}
   .band-lav::before{background:linear-gradient(180deg, #0b0b0d 0%, #161616 50%, #0b0b0d 100%);}
+  /* ABOUT 이더라운드 */
+  .about-wrap{max-width:600px;margin:0 auto;text-align:center;padding:0 4px;}
+  .about-lead{font-size:16px;line-height:1.78;color:#DAD3C5;margin:0 auto 20px;}
+  .about-lead b{color:var(--gold);font-weight:700;}
+  .about-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px;}
+  .about-tags span{font-size:13px;font-weight:600;color:#EBD597;background:rgba(230,197,114,.10);border:1px solid rgba(230,197,114,.30);border-radius:999px;padding:8px 14px;}
+  .about-mission{position:relative;font-size:15px;line-height:1.75;color:#C3BCB0;max-width:44ch;margin:0 auto 24px;padding:18px 20px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(230,197,114,.18);border-radius:14px;}
+  .about-mission::before{content:"\201C";position:absolute;left:14px;top:6px;font-size:32px;line-height:1;color:rgba(230,197,114,.5);font-family:Georgia,serif;}
+  .about-cta{display:inline-flex;align-items:center;gap:6px;font-size:15.5px;font-weight:800;color:#241b06;background:linear-gradient(135deg,#E8CB78,#C99A3A);padding:13px 24px;border-radius:999px;}
+  .about-cta:hover{filter:brightness(1.05);}
 
   /* ============ 고정 골드 CTA + 번호 입력 모달 ============ */
   .fb-cta{position:relative;overflow:hidden;width:100%;padding:18px;font-size:21px;font-weight:800;border-radius:14px;background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;display:flex;align-items:center;justify-content:center;gap:8px;}
@@ -911,6 +921,26 @@
     </div>
   </div>
 
+  </div>
+
+  <!-- ABOUT 이더라운드 -->
+  <div class="band band-amber">
+  <div class="ev-head">
+    <span class="ev-label">ABOUT</span>
+    <h2 class="ev-title">먹고, 알고, <span class="hl">경험하자</span></h2>
+    <p class="ev-sub">이더라운드는 가장 제주다운 제주 여행을 만드는 로컬 여행 플랫폼이에요.</p>
+  </div>
+  <section class="about-wrap">
+    <p class="about-lead">요리연구가·명인의 <b>원데이 클래스</b>부터 제주 마을·양조장 투어, 파인다이닝까지 — 지역의 식문화를 직접 <b>먹고, 알고, 경험하는</b> 여행을 제안합니다.</p>
+    <div class="about-tags">
+      <span>🍳 원데이 클래스</span>
+      <span>🍶 양조장·마을 투어</span>
+      <span>🍽️ 파인다이닝</span>
+      <span>🏡 카름스테이</span>
+    </div>
+    <p class="about-mission">지속가능함을 실천하는 여행자에게 지역의 식문화를 경험할 수 있는 여행을 제공하고, 그 가치가 필요한 곳으로 흘러가길 바랍니다.</p>
+    <a class="about-cta" href="https://eataround.co.kr" target="_blank" rel="noopener">이더라운드 둘러보기 →</a>
+  </section>
   </div>
 
   <footer>
