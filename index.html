@@ -720,8 +720,8 @@
         <div class="pitem">
           <div class="pthumb"><img src="images/prize-terrarium.jpg?v=2" alt="곶자왈 테라리움"></div>
           <div class="pbody">
-            <div class="ptop"><span class="pno">4</span><span class="pname">곶자왈 테라리움 체험</span></div>
-            <div class="psub">4등 · 1명 선정 · 2인 체험 · <span style="color:#E6C572">4만 8천원 상당</span></div>
+            <div class="ptop"><span class="pno">4</span><span class="pname">테라리움 디저트 체험</span></div>
+            <div class="psub">4등 · 1명 선정 · 2인 체험 · <span style="color:#E6C572">6만 8천원 상당</span></div>
             <div class="pdesc">제주 곶자왈을 담은 미니 정원 테라리움</div>
           </div>
         </div>
@@ -729,7 +729,7 @@
           <div class="pthumb"><img src="images/prize-makgeolli.jpg?v=2" alt="찹쌀 막걸리"></div>
           <div class="pbody">
             <div class="ptop"><span class="pno">5</span><span class="pname">찹쌀 막걸리 체험권</span></div>
-            <div class="psub">5등 · 1명 선정 · 2인 체험 · <span style="color:#E6C572">4만 2천원 상당</span></div>
+            <div class="psub">5등 · 1명 선정 · 2인 체험 · <span style="color:#E6C572">6만원 상당</span></div>
             <div class="pdesc">직접 빚어보는 제주 찹쌀 전통주</div>
           </div>
         </div>
@@ -811,13 +811,9 @@
     <div class="pad">
       <p class="sec-label">🏆 LEADERBOARD</p>
       <h2 class="sec-title" style="display:flex;justify-content:space-between;align-items:flex-start;">
-        <span>실시간 순위<span class="sub">지인이 정보를 남긴 수 기준</span></span>
+        <span>누적 순위<span class="sub">지인이 정보를 남긴 수 기준</span></span>
         <span class="live"><span class="ping"></span>LIVE</span>
       </h2>
-      <div class="ltabs">
-        <div class="ltab on">실시간 순위</div>
-        <div class="ltab">누적 순위</div>
-      </div>
       <div id="boardList"></div>
     </div>
   </section>
@@ -1278,8 +1274,7 @@
 
   /* 실시간 참여 피드는 메인 스크립트(loadBoard 폴링 + showFeed)가 백엔드 실데이터로 처리 */
 
-  /* 순위 필터 탭(시각) */
-  $$('.ltab').forEach(function(t){ t.addEventListener('click',function(){ $$('.ltab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); }); });
+  /* 순위 탭 제거됨 — 누적 순위만 노출 */
 })();
 </script>
 </body>
