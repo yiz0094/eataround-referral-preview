@@ -523,16 +523,11 @@
   @keyframes bob{0%,100%{transform:translateY(0);opacity:.65;}50%{transform:translateY(7px);opacity:1;}}
   @media (prefers-reduced-motion:no-preference){
     body::before{animation:glowPulse 5s ease-in-out infinite;}
-    .hero-stars span{display:inline-block;animation:twinkle 2.6s ease-in-out infinite;}
-    .hero-stars span:nth-child(2){animation-delay:.4s;}
-    .hero-stars span:nth-child(3){animation-delay:.8s;}
-    .hero-stars span:nth-child(4){animation-delay:1.2s;}
-    .hero-stars span:nth-child(5){animation-delay:1.6s;}
     .fb-submit{position:relative;overflow:hidden;}
     .fb-submit::after{content:"";position:absolute;top:-10%;left:0;width:26%;height:120%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.6s ease-in-out infinite;pointer-events:none;}
     .scrolldown .ch{animation:bob 1.6s ease-in-out infinite;}
   }
-  .hero-stars span{margin:0 3px;}
+  .hero-stars span{display:inline-block;margin:0 3px;}
   /* 리더보드 진행 바 */
   .row{position:relative;}
   .row > *{position:relative;z-index:1;}
