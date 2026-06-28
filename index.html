@@ -802,7 +802,7 @@
   <section class="card">
     <div class="livefeed">
       <span class="lf-badge"><span class="lf-dot"></span>LIVE</span>
-      <span class="lf-msg" id="liveFeedMsg">🎉 방금 <b>제주러버</b>님이 참여했어요</span>
+      <span class="lf-msg" id="liveFeedMsg">🙌 실시간 참여 현황</span>
     </div>
   </section>
 
@@ -989,6 +989,7 @@
 
   /* 리더보드 데이터 (백엔드에서 폴링으로 채움) */
   var BOARD = [];
+  var ACT = [];   // 최근 1시간 실시간 활동(백엔드 실데이터)
 
   var $ = function(id){ return document.getElementById(id); };
 
@@ -1077,9 +1078,19 @@
       if(res && res.ok && res.leaderboard){
         BOARD = res.leaderboard.map(function(r){ return { nick:r.nickname, cnt:r.count, ref:r.ref, tail:r.tail }; });
         renderBoard();
+        if(res.activity && res.activity.length){ var first = !ACT.length; ACT = res.activity; if(first) showFeed(); }
       }
     });
   }
+  /* 실시간 참여 피드: 백엔드 최근 1시간 실데이터(ACT)를 순환 표시 */
+  var fm = null, fi = 0;
+  function showFeed(){
+    if(!fm) fm = document.getElementById('liveFeedMsg');
+    if(!fm || !ACT.length) return;
+    fm.style.opacity = 0;
+    setTimeout(function(){ fm.innerHTML = ACT[fi % ACT.length]; fm.style.opacity = 1; fi++; }, 240);
+  }
+  setInterval(showFeed, 3200);
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 
   /* ===== 결과 화면 표시 ===== */
@@ -1265,10 +1276,7 @@
 
   /* 리더보드 바/카운트업은 메인 스크립트(renderBoard)가 폴링과 함께 처리 */
 
-  /* 실시간 참여 피드 */
-  var feed=['🎉 방금 <b>제주러버</b>님이 참여했어요','🔥 <b>바다왕</b>님이 친구 3명을 모았어요','📈 <b>돌하르방</b>님이 5위로 올라섰어요','🗺️ <b>감귤조아</b>님이 맛집 지도를 받았어요','✨ <b>오름지기</b>님이 방금 링크를 공유했어요','🙌 <b>해녀의꿈</b>님이 친구를 초대했어요'];
-  var fm=document.getElementById('liveFeedMsg'), fi=1;
-  if(fm){ setInterval(function(){ fm.style.opacity=0; setTimeout(function(){ fm.innerHTML=feed[fi%feed.length]; fm.style.opacity=1; fi++; },260); }, 2900); }
+  /* 실시간 참여 피드는 메인 스크립트(loadBoard 폴링 + showFeed)가 백엔드 실데이터로 처리 */
 
   /* 순위 필터 탭(시각) */
   $$('.ltab').forEach(function(t){ t.addEventListener('click',function(){ $$('.ltab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); }); });
