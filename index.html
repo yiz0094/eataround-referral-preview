@@ -577,6 +577,20 @@
   .about-mission::before{content:"\201C";position:absolute;left:14px;top:6px;font-size:32px;line-height:1;color:rgba(230,197,114,.5);font-family:Georgia,serif;}
   .about-cta{display:inline-flex;align-items:center;gap:6px;font-size:15.5px;font-weight:800;color:#241b06;background:linear-gradient(135deg,#E8CB78,#C99A3A);padding:13px 24px;border-radius:999px;}
   .about-cta:hover{filter:brightness(1.05);}
+  /* ABOUT 섹션: 이더라운드 브랜드 그린 */
+  .band-about::before{background:linear-gradient(180deg, #0b0b0d 0%, #2C5A3F 28%, #2C5A3F 72%, #0b0b0d 100%);}
+  .band-about .ev-label{color:#F2EEE3;border-color:rgba(242,238,227,.55);background:rgba(255,255,255,.08);}
+  .band-about .ev-title{color:#F6F2E9;}
+  .band-about .ev-title .hl{color:#F2D99A;}
+  .band-about .ev-head::before{background:#8FCBA3;}
+  .band-about .ev-sub{color:#DCE6DD;}
+  .band-about .about-lead{color:#E9E4D7;}
+  .band-about .about-lead b{color:#FFFFFF;}
+  .band-about .about-tags span{color:#27523A;background:#F1ECE0;border-color:transparent;}
+  .band-about .about-mission{background:rgba(0,0,0,.20);border-color:rgba(242,238,227,.26);color:#E4E8E1;}
+  .band-about .about-mission::before{color:rgba(242,238,227,.55);}
+  .brk{display:none;}
+  @media (max-width:560px){.brk{display:inline;}}
 
   /* ============ 고정 골드 CTA + 번호 입력 모달 ============ */
   .fb-cta{position:relative;overflow:hidden;width:100%;padding:18px;font-size:21px;font-weight:800;border-radius:14px;background:linear-gradient(135deg,#B98E32,#EBCE78);color:#241b06;display:flex;align-items:center;justify-content:center;gap:8px;}
@@ -924,14 +938,14 @@
   </div>
 
   <!-- ABOUT 이더라운드 -->
-  <div class="band band-amber">
+  <div class="band band-about">
   <div class="ev-head">
     <span class="ev-label">ABOUT</span>
     <h2 class="ev-title">먹고, 알고, <span class="hl">경험하자</span></h2>
-    <p class="ev-sub">이더라운드는 가장 제주다운 제주 여행을 만드는 로컬 여행 플랫폼이에요.</p>
+    <p class="ev-sub">이더라운드는 가장 제주다운 <br class="brk">제주 여행을 만드는 <br class="brk">로컬 여행 플랫폼이에요.</p>
   </div>
   <section class="about-wrap">
-    <p class="about-lead">요리연구가·명인의 <b>원데이 클래스</b>부터 제주 마을·양조장 투어, 파인다이닝까지 — 지역의 식문화를 직접 <b>먹고, 알고, 경험하는</b> 여행을 제안합니다.</p>
+    <p class="about-lead">요리연구가·명인의 <b>원데이 클래스</b>부터 <br class="brk">제주 마을·양조장 투어, 파인다이닝까지 — <br class="brk">지역의 식문화를 직접 <b>먹고, 알고, <br class="brk">경험하는</b> 여행을 제안합니다.</p>
     <div class="about-tags">
       <span>🍳 원데이 클래스</span>
       <span>🍶 양조장·마을 투어</span>
@@ -939,7 +953,6 @@
       <span>🏡 카름스테이</span>
     </div>
     <p class="about-mission">지속가능함을 실천하는 여행자에게 지역의 식문화를 경험할 수 있는 여행을 제공하고, 그 가치가 필요한 곳으로 흘러가길 바랍니다.</p>
-    <a class="about-cta" href="https://eataround.co.kr" target="_blank" rel="noopener">이더라운드 둘러보기 →</a>
   </section>
   </div>
 
