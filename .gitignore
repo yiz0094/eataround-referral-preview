@@ -6,3 +6,5 @@ preview-*.html
 
 # OS
 .DS_Store
+.vercel
+.env*
