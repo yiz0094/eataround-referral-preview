@@ -22,15 +22,15 @@ var CACHE_SEC = 7;    // 리더보드 캐시 (폴링 부하/쿼터 완화)
 // 제출 1건 = 시트 1행에 아래 값들이 함께 기록됨 → 알림톡 자동발송 툴이 행을 그대로 변수에 매핑.
 // (닉네임=nickname 열, 전화번호=phone 열, 추천링크=아래 링크 열을 사용)
 var PROMO_NAME     = '2026 마을 여행 기획전';             // #{프로모션명}
-var PROMO_PERIOD   = '2026.08.05(수) ~ 2026.08.18(화)';   // #{기간}
-var PROMO_ANNOUNCE = '2026.08.21(금)';                    // #{발표일}
+var PROMO_PERIOD   = '2026.08.06(목) ~ 2026.08.19(수)';   // #{기간}
+var PROMO_ANNOUNCE = '2026.08.24(월)';                    // #{발표일}
 var FOODLIST_LINK  = 'https://jeju-matjip-map.vercel.app/'; // #{맛집리스트링크}
 
 // ===== 접수 기간 게이트 =====
 // 프론트(index.html)의 START_DATE/END_DATE와 같은 값이어야 한다.
-// START는 오픈 전 QA를 위해 하루 앞(8/4)으로 열어둔 상태. 기간을 엄격히 지키려면 08-05T00:00:00으로 되돌릴 것.
+// START는 오픈(8/6) 전 QA를 위해 앞당겨 열어둔 상태. 기간을 엄격히 지키려면 08-06T00:00:00으로 되돌릴 것.
 var PROMO_START = new Date('2026-08-04T00:00:00+09:00');
-var PROMO_END   = new Date('2026-08-18T23:59:59+09:00');
+var PROMO_END   = new Date('2026-08-19T23:59:59+09:00');
 
 // entries 시트 헤더(순서 고정). 9번째까지는 기존 컬럼 — 인덱스 참조 로직이 의존하므로 변경 금지.
 var HEADERS = ['entry_id','ref_code','nickname','phone','cookie_id','referred_by','user_agent','created_at','valid_for_rank',
@@ -171,7 +171,7 @@ function doPost(e){
     if(state !== 'open'){
       lock.releaseLock();
       return respond_(e, { ok:false, state:state,
-        error: (state === 'before') ? '프로모션은 8월 5일(수)에 시작돼요.' : '프로모션 접수가 종료되었어요.' });
+        error: (state === 'before') ? '프로모션은 8월 6일(목)에 시작돼요.' : '프로모션 접수가 종료되었어요.' });
     }
 
     // 신규 → 고유 코드 발급 + 행 추가

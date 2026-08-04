@@ -855,10 +855,10 @@
       <div class="infobox">
         <div class="ib-t">📅 진행 일정</div>
         <div class="sched">
-          <div class="sched-row"><div class="sched-when">8.5(수)</div><div class="sched-what">프로모션 시작 · 참여자에게 고유 링크 발송</div></div>
-          <div class="sched-row"><div class="sched-when">8.5~8.18</div><div class="sched-what">2주간 실시간 리더보드 운영 · 중간 순위 알림</div></div>
-          <div class="sched-row"><div class="sched-when">8.18(화)</div><div class="sched-what">프로모션 종료 · 순위 확정</div></div>
-          <div class="sched-row"><div class="sched-when">8.21(금)</div><div class="sched-what">당첨자 발표 · 상위 10명 알림톡 개별 안내</div></div>
+          <div class="sched-row"><div class="sched-when">8.6(목)</div><div class="sched-what">프로모션 시작 · 참여자에게 고유 링크 발송</div></div>
+          <div class="sched-row"><div class="sched-when">8.6~8.19</div><div class="sched-what">2주간 실시간 리더보드 운영 · 중간 순위 알림</div></div>
+          <div class="sched-row"><div class="sched-when">8.19(수)</div><div class="sched-what">프로모션 종료 · 순위 확정</div></div>
+          <div class="sched-row"><div class="sched-when">8.24(월)</div><div class="sched-what">당첨자 발표 · 상위 10명 알림톡 개별 안내</div></div>
         </div>
       </div>
     </div>
@@ -908,7 +908,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">당첨자는 언제 발표되나요?<span class="chev">⌄</span></div>
-      <div class="faq-a"><div class="faq-a-in">프로모션 종료(8.18) 후 순위를 확정해, <b>8월 21일(금)</b> 상위 10명에게 <b>알림톡으로 개별 안내</b>드려요.</div></div>
+      <div class="faq-a"><div class="faq-a-in">프로모션 종료(8.19) 후 순위를 확정해, <b>8월 24일(월)</b> 상위 10명에게 <b>알림톡으로 개별 안내</b>드려요.</div></div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">개인정보는 어떻게 사용되나요?<span class="chev">⌄</span></div>
@@ -978,8 +978,8 @@
   "use strict";
 
   /* ===== 설정 (목업) ===== */
-  var START_DATE = new Date('2026-08-04T00:00:00+09:00'); // 접수 시작 — QA 위해 하루 앞으로 열어둠. backend/Code.gs의 PROMO_START와 같은 값이어야 함
-  var END_DATE   = new Date('2026-08-18T23:59:59+09:00'); // 접수 마감 — backend/Code.gs의 PROMO_END와 같은 값이어야 함
+  var START_DATE = new Date('2026-08-04T00:00:00+09:00'); // 접수 시작 — 오픈(8/6) 전 QA를 위해 앞당겨 열어둠. backend/Code.gs의 PROMO_START와 같은 값이어야 함
+  var END_DATE   = new Date('2026-08-19T23:59:59+09:00'); // 접수 마감 — backend/Code.gs의 PROMO_END와 같은 값이어야 함
   var LINK_BASE = 'event.eataround.co.kr/r/';
 
   /* ===== 백엔드 연결 (Apps Script 웹앱) ===== */
@@ -990,17 +990,22 @@
      방문자 기기 시계는 틀릴 수 있으므로 서버(리더보드 폴링)가 알려준 상태를 우선한다.
      최종 차단은 어차피 서버(doPost)가 하고, 여기는 UI를 맞추는 역할. */
   var serverState = null;
+  var HINT_DEFAULT = '* 연락처는 당첨 안내 용도로만 사용돼요.';
+  var hintIsGate = false;
   function localState(){ var n = new Date(); return n < START_DATE ? 'before' : (n > END_DATE ? 'after' : 'open'); }
   function promoState(){ return serverState || localState(); }
   function isOpen(){ return promoState() === 'open'; }
-  function gateMsg(){ return promoState() === 'before' ? '8월 5일(수)부터 참여할 수 있어요.' : '프로모션 접수가 종료되었어요.'; }
+  function gateMsg(){ return promoState() === 'before' ? '8월 6일(목)부터 참여할 수 있어요.' : '프로모션 접수가 종료되었어요.'; }
   function applyGate(){
     var open = isOpen();
     if(makeBtn)  makeBtn.disabled  = open ? !agree.checked   : true;
     if(fbSubmit) fbSubmit.disabled = open ? !fbAgree.checked : true;
-    if(!open){
-      var h = $('formHint');
-      if(h){ h.classList.add('err'); h.textContent = gateMsg(); }
+    // 서버 상태가 뒤늦게 도착해 닫힘→열림으로 바뀔 수 있으므로 안내 문구를 되돌린다.
+    // 입력 검증 실패 문구는 건드리지 않도록 게이트가 쓴 경우만 복구한다.
+    var h = $('formHint');
+    if(h){
+      if(!open){ h.classList.add('err'); h.textContent = gateMsg(); hintIsGate = true; }
+      else if(hintIsGate){ h.classList.remove('err'); h.textContent = HINT_DEFAULT; hintIsGate = false; }
     }
     updateBar();
     tick();
@@ -1029,7 +1034,7 @@
   /* ===== 카운트다운 ===== */
   function tick(){
     var lab = $('ddayLabel'), el = $('dday'), st = promoState();
-    if(st === 'before'){ if(lab) lab.textContent = '오픈'; el.textContent = '8.5(수)'; return; }
+    if(st === 'before'){ if(lab) lab.textContent = '오픈'; el.textContent = '8.6(목)'; return; }
     if(st === 'after'){ if(lab) lab.textContent = ''; el.textContent = '종료'; return; }
     if(lab) lab.textContent = '마감';
     var diff = END_DATE - new Date();
