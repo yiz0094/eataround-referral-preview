@@ -622,7 +622,7 @@
     <div class="logo">
       <img src="images/logo-white.png" alt="이더라운드" />
     </div>
-    <span class="dday">🎁 마감 <b id="dday">D-13</b></span>
+    <span class="dday">🎁 <span id="ddayLabel">마감</span> <b id="dday">D-13</b></span>
   </div>
 </header>
 
@@ -978,12 +978,33 @@
   "use strict";
 
   /* ===== 설정 (목업) ===== */
-  var END_DATE = new Date('2026-08-18T23:59:59+09:00'); // 마감일 (프로모션 2026-08-05 ~ 08-18)
+  var START_DATE = new Date('2026-08-04T00:00:00+09:00'); // 접수 시작 — QA 위해 하루 앞으로 열어둠. backend/Code.gs의 PROMO_START와 같은 값이어야 함
+  var END_DATE   = new Date('2026-08-18T23:59:59+09:00'); // 접수 마감 — backend/Code.gs의 PROMO_END와 같은 값이어야 함
   var LINK_BASE = 'event.eataround.co.kr/r/';
 
   /* ===== 백엔드 연결 (Apps Script 웹앱) ===== */
   var WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbw0irgpH7S3pIL1HnUmClykyZQR0dW5wrkXbLchkZGotOnJ8I9fNFFYf99A8uXdn-RFiw/exec';
   var myLink = '', myRef = '', submitting = false;
+
+  /* ===== 접수 기간 게이트 =====
+     방문자 기기 시계는 틀릴 수 있으므로 서버(리더보드 폴링)가 알려준 상태를 우선한다.
+     최종 차단은 어차피 서버(doPost)가 하고, 여기는 UI를 맞추는 역할. */
+  var serverState = null;
+  function localState(){ var n = new Date(); return n < START_DATE ? 'before' : (n > END_DATE ? 'after' : 'open'); }
+  function promoState(){ return serverState || localState(); }
+  function isOpen(){ return promoState() === 'open'; }
+  function gateMsg(){ return promoState() === 'before' ? '8월 5일(수)부터 참여할 수 있어요.' : '프로모션 접수가 종료되었어요.'; }
+  function applyGate(){
+    var open = isOpen();
+    if(makeBtn)  makeBtn.disabled  = open ? !agree.checked   : true;
+    if(fbSubmit) fbSubmit.disabled = open ? !fbAgree.checked : true;
+    if(!open){
+      var h = $('formHint');
+      if(h){ h.classList.add('err'); h.textContent = gateMsg(); }
+    }
+    updateBar();
+    tick();
+  }
   function getCookieId(){ try{ var k='ea_cid', v=localStorage.getItem(k); if(!v){ v=Date.now().toString(36)+Math.random().toString(36).slice(2,10); localStorage.setItem(k,v); } return v; }catch(e){ return ''; } }
   function getRefParam(){ try{ return new URLSearchParams(location.search).get('ref')||''; }catch(e){ return ''; } }
   function buildLink(code){ return location.origin + location.pathname + '?ref=' + code; }
@@ -1007,11 +1028,14 @@
 
   /* ===== 카운트다운 ===== */
   function tick(){
-    var now = new Date();
-    var diff = END_DATE - now;
+    var lab = $('ddayLabel'), el = $('dday'), st = promoState();
+    if(st === 'before'){ if(lab) lab.textContent = '오픈'; el.textContent = '8.5(수)'; return; }
+    if(st === 'after'){ if(lab) lab.textContent = ''; el.textContent = '종료'; return; }
+    if(lab) lab.textContent = '마감';
+    var diff = END_DATE - new Date();
     if(diff < 0) diff = 0;
     var d = Math.floor(diff/86400000);
-    $('dday').textContent = 'D-' + d;
+    el.textContent = 'D-' + d;
     var dh = $('ddayHero'); if(dh){ dh.textContent = d; }
   }
   tick();
@@ -1032,7 +1056,7 @@
   /* ===== 마케팅 수신 동의 → 버튼 활성화 ===== */
   var agree = $('agree');
   var makeBtn = $('makeBtn');
-  agree.addEventListener('change', function(){ makeBtn.disabled = !agree.checked; });
+  agree.addEventListener('change', function(){ makeBtn.disabled = !isOpen() || !agree.checked; });
 
   /* ===== 코드 생성 (목업) ===== */
   function makeCode(seed){
@@ -1078,6 +1102,7 @@
   function loadBoard(){
     jsonp(WEBAPP_URL + '?action=leaderboard&t=' + Date.now(), function(res){
       if(res && res.ok && res.leaderboard){
+        if(res.state && res.state !== serverState){ serverState = res.state; applyGate(); }
         BOARD = res.leaderboard.map(function(r){ return { nick:r.nickname, cnt:r.count, ref:r.ref, tail:r.tail }; });
         renderBoard();
         if(res.activity && res.activity.length){ var first = !ACT.length; ACT = res.activity; if(first) showFeed(); }
@@ -1118,6 +1143,7 @@
 
   /* ===== 링크 만들기 ===== */
   $('makeBtn').addEventListener('click', function(){
+    if(!isOpen()){ toast(gateMsg()); applyGate(); return; }
     var nick = $('nick').value.trim();
     var ph = $('phone').value.trim();
     var ok = true;
@@ -1198,8 +1224,9 @@
     else { fbPhone.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7); }
     fbPhone.classList.remove('err');
   });
-  fbAgree.addEventListener('change', function(){ fbSubmit.disabled = !fbAgree.checked; });
+  fbAgree.addEventListener('change', function(){ fbSubmit.disabled = !isOpen() || !fbAgree.checked; });
   fbSubmit.addEventListener('click', function(){
+    if(!isOpen()){ toast(gateMsg()); applyGate(); return; }
     var ph = fbPhone.value.trim();
     if(!/^010-\d{4}-\d{4}$/.test(ph)){
       fbPhone.classList.add('err');
@@ -1231,7 +1258,7 @@
   var participated = false;
   function updateBar(){
     var fb = $('floatBar'); if(!fb) return;
-    if(participated){ fb.style.display = 'none'; return; }
+    if(participated || !isOpen()){ fb.style.display = 'none'; return; }
     var hero = document.querySelector('.hero');
     var th = hero ? hero.offsetHeight * 0.6 : 400;
     fb.style.display = (window.scrollY > th) ? 'block' : 'none';
@@ -1248,6 +1275,7 @@
     if(saved && saved.code){ showResult(saved); }
     else { showForm(); }
     loadBoard();
+    applyGate();
     setInterval(loadBoard, 7000);
   }
   init();

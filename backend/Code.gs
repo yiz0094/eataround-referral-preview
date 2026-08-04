@@ -26,6 +26,12 @@ var PROMO_PERIOD   = '2026.08.05(수) ~ 2026.08.18(화)';   // #{기간}
 var PROMO_ANNOUNCE = '2026.08.21(금)';                    // #{발표일}
 var FOODLIST_LINK  = 'https://jeju-matjip-map.vercel.app/'; // #{맛집리스트링크}
 
+// ===== 접수 기간 게이트 =====
+// 프론트(index.html)의 START_DATE/END_DATE와 같은 값이어야 한다.
+// START는 오픈 전 QA를 위해 하루 앞(8/4)으로 열어둔 상태. 기간을 엄격히 지키려면 08-05T00:00:00으로 되돌릴 것.
+var PROMO_START = new Date('2026-08-04T00:00:00+09:00');
+var PROMO_END   = new Date('2026-08-18T23:59:59+09:00');
+
 // entries 시트 헤더(순서 고정). 9번째까지는 기존 컬럼 — 인덱스 참조 로직이 의존하므로 변경 금지.
 var HEADERS = ['entry_id','ref_code','nickname','phone','cookie_id','referred_by','user_agent','created_at','valid_for_rank',
                '추천링크','프로모션명','기간','발표일','맛집리스트링크'];
@@ -76,6 +82,14 @@ function genCode_(existingSet){
 
 function isTrue_(v){ return v === true || v === 'TRUE' || v === 'true'; }
 
+/** 'before' | 'open' | 'after'. 신규 접수 허용 여부의 단일 기준. */
+function promoState_(){
+  var now = new Date();
+  if(now < PROMO_START) return 'before';
+  if(now > PROMO_END)   return 'after';
+  return 'open';
+}
+
 // ===== 응답 (JSON / JSONP 둘 다 지원) =====
 function respond_(e, obj){
   var cb = e && e.parameter && e.parameter.callback;
@@ -95,7 +109,7 @@ function doGet(e){
 
   if(action === 'leaderboard'){
     var b = getBoardCached_();
-    return respond_(e, { ok:true, leaderboard: b.top, total: b.total, activity: b.activity });
+    return respond_(e, { ok:true, state: promoState_(), leaderboard: b.top, total: b.total, activity: b.activity });
   }
   if(action === 'me'){
     var full = getLeaderboardFull_();
@@ -149,6 +163,15 @@ function doPost(e){
       var lbR = buildLeaderboard_(data); var meR = lbR.byCode[myCode] || { count:0, rank:null };
       lock.releaseLock();
       return respond_(e, { ok:true, returning:true, ref_code:myCode, link: BASE_LINK + '?ref=' + myCode, count: meR.count, rank: meR.rank });
+    }
+
+    // 기간 게이트는 신규 접수에만 적용. 위 재방문 분기(기존 전화번호)는 종료 후에도 열어둬야
+    // 참여자가 자기 링크·순위를 계속 확인할 수 있다.
+    var state = promoState_();
+    if(state !== 'open'){
+      lock.releaseLock();
+      return respond_(e, { ok:false, state:state,
+        error: (state === 'before') ? '프로모션은 8월 5일(수)에 시작돼요.' : '프로모션 접수가 종료되었어요.' });
     }
 
     // 신규 → 고유 코드 발급 + 행 추가
