@@ -24,7 +24,7 @@ var CACHE_SEC = 7;    // 리더보드 캐시 (폴링 부하/쿼터 완화)
 var PROMO_NAME     = '2026 마을 여행 기획전';             // #{프로모션명}
 var PROMO_PERIOD   = '2026.08.05(수) ~ 2026.08.18(화)';   // #{기간}
 var PROMO_ANNOUNCE = '2026.08.21(금)';                    // #{발표일}
-var FOODLIST_LINK  = '';                                  // #{맛집리스트링크} — 링크 확정되면 여기 입력 후 재배포
+var FOODLIST_LINK  = 'https://jeju-matjip-map.vercel.app/'; // #{맛집리스트링크}
 
 // entries 시트 헤더(순서 고정). 9번째까지는 기존 컬럼 — 인덱스 참조 로직이 의존하므로 변경 금지.
 var HEADERS = ['entry_id','ref_code','nickname','phone','cookie_id','referred_by','user_agent','created_at','valid_for_rank',

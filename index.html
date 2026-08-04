@@ -339,7 +339,8 @@
   .hero-trust b{color:#FFE08A;font-weight:800;}
   .hero-trust i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.55);}
   .listpeek{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px;background:#fff;}
-  .listpeek-doc{padding:15px 16px;filter:blur(4.5px);user-select:none;}
+  .listpeek-doc{padding:0;filter:blur(1.5px);transform:scale(1.03);user-select:none;}
+  .listpeek-doc img{display:block;width:100%;height:auto;}
   .lp-h{font-size:13.5px;font-weight:800;color:var(--green-dark);margin-bottom:10px;}
   .lp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F2EFE7;}
   .lp-row:last-child{border-bottom:none;}
@@ -347,6 +348,8 @@
   .lp-nm{flex:1;font-size:13.5px;font-weight:700;color:var(--ink);}
   .lp-meta{font-size:11.5px;color:var(--muted);}
   .listpeek-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,.74));}
+  .lp-lock-ic{font-size:25px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.22));}
+  .lp-lock-t{margin-top:8px;font-size:13px;font-weight:800;color:var(--green-dark);background:rgba(255,255,255,.88);border:1px solid rgba(44,90,63,.16);padding:6px 14px;border-radius:999px;}
   .ll-ic{font-size:23px;}
   .ll-t{font-size:15px;font-weight:800;color:var(--green-dark);margin-top:5px;}
   .ll-d{font-size:11.5px;color:var(--muted);margin-top:3px;}
@@ -438,7 +441,8 @@
   .listpeek{background:#100f15;border-color:var(--line);}
   .lp-h{color:var(--gold);} .lp-nm{color:#F2ECDE;} .lp-no{color:var(--gold);} .lp-meta{color:var(--muted);}
   .lp-row{border-bottom-color:rgba(255,255,255,.06);}
-  .listpeek-lock{background:linear-gradient(180deg,rgba(16,15,21,.35),rgba(16,15,21,.8));}
+  .listpeek-lock{background:linear-gradient(180deg,rgba(16,15,21,.10),rgba(16,15,21,.52));}
+  .lp-lock-t{color:var(--gold);background:rgba(16,15,21,.82);border-color:rgba(230,197,114,.35);}
   .maplist{background:linear-gradient(140deg,#2b2109,#15110a);border:1px solid rgba(230,197,114,.3);}
   .ml-unlock-t{color:var(--gold);} .ml-unlock-d{color:rgba(255,255,255,.8);border-bottom-color:rgba(230,197,114,.25);}
   .mls{color:rgba(255,255,255,.92);} .mls b{color:var(--gold);}
@@ -662,12 +666,11 @@
       <div class="ev1-graphic">
         <div class="listpeek">
           <div class="listpeek-doc" aria-hidden="true">
-            <div class="lp-h">🍴 제주 로컬 맛집 리스트</div>
-            <div class="lp-row"><span class="lp-no">01</span><span class="lp-nm">○○○ 흑돼지 노포</span><span class="lp-meta">제주시 · ★ 4.9</span></div>
-            <div class="lp-row"><span class="lp-no">02</span><span class="lp-nm">○○ 고기국수</span><span class="lp-meta">노형동 · ★ 4.8</span></div>
-            <div class="lp-row"><span class="lp-no">03</span><span class="lp-nm">○○ 물회 맛집</span><span class="lp-meta">서귀포 · ★ 4.8</span></div>
-            <div class="lp-row"><span class="lp-no">04</span><span class="lp-nm">○○ 오션뷰 카페</span><span class="lp-meta">애월 · ★ 4.7</span></div>
-            <div class="lp-row"><span class="lp-no">05</span><span class="lp-nm">○○ 로컬 베이커리</span><span class="lp-meta">구좌 · ★ 4.9</span></div>
+            <img src="images/foodlist-peek.jpg?v=1" alt="제주 로컬 맛집 지도 미리보기" />
+          </div>
+          <div class="listpeek-lock">
+            <div class="lp-lock-ic">🔒</div>
+            <div class="lp-lock-t">번호를 남기면 전체 공개</div>
           </div>
         </div>
         <span class="circbadge">전원<br><b>무료</b></span>
