@@ -33,8 +33,11 @@ var PROMO_START = new Date('2026-08-04T00:00:00+09:00');
 var PROMO_END   = new Date('2026-08-19T23:59:59+09:00');
 
 // entries 시트 헤더(순서 고정). 9번째까지는 기존 컬럼 — 인덱스 참조 로직이 의존하므로 변경 금지.
+// 뒤 5개는 알림톡 발송 상태. 기존 행은 이 칸이 비어 있고, 재시도는 PENDING/RETRY만 집으므로
+// 나중에 발송을 켜도 과거 참여자에게 소급 발송되지 않는다.
 var HEADERS = ['entry_id','ref_code','nickname','phone','cookie_id','referred_by','user_agent','created_at','valid_for_rank',
-               '추천링크','프로모션명','기간','발표일','맛집리스트링크'];
+               '추천링크','프로모션명','기간','발표일','맛집리스트링크',
+               '알림톡상태','알림톡시각','시도횟수','알림톡오류','메시지ID'];
 
 // ===== 시트 헬퍼 =====
 function ss_(){ return SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet(); }
@@ -182,12 +185,19 @@ function doPost(e){
     ensureAlimtalkHeaders_(sh, data[0]); // 구 9컬럼 시트면 알림톡 변수 헤더 보강
     // 뒤 5개 = 알림톡 변수(추천링크/프로모션명/기간/발표일/맛집리스트링크)
     var newRow = [ Utilities.getUuid(), newCode, nickname, phone, cookie, referredBy || '', ua, new Date(), validForRank,
-                   newLink, PROMO_NAME, PROMO_PERIOD, PROMO_ANNOUNCE, FOODLIST_LINK ];
+                   newLink, PROMO_NAME, PROMO_PERIOD, PROMO_ANNOUNCE, FOODLIST_LINK,
+                   'PENDING', '', 0, '', '' ];
     sh.appendRow(newRow);
+    var newRowIndex = sh.getLastRow();
     CacheService.getScriptCache().remove('lb'); // 리더보드 캐시 무효화
     data.push(newRow); // 방금 추가분 포함해 내 순위 계산
     var lbN = buildLeaderboard_(data); var meN = lbN.byCode[newCode] || { count:0, rank:null };
     lock.releaseLock();
+
+    // 알림톡은 반드시 락 해제 이후에 보낸다. 락 구간에서 외부 HTTPS를 호출하면 전역 락 보유시간이
+    // 왕복만큼 늘어 동시 제출이 '잠시 후 다시 시도해주세요'로 밀린다.
+    // 발송 실패가 참여 등록을 깨뜨리면 안 되므로 삼키고, 행의 상태 컬럼에 남겨 재시도에 맡긴다.
+    try { sendAlimtalkRow_(sh, newRowIndex, newRow); } catch(err2){}
 
     return respond_(e, { ok:true, returning:false, ref_code:newCode, link: newLink, count: meN.count, rank: meN.rank, credited: validForRank });
   } catch(err){
@@ -263,6 +273,166 @@ function buildActivity_(data, full){
 function esc_(s){ return ('' + (s||'')).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function getTotalCount_(){ return Math.max(0, sheet_(ENTRIES).getLastRow() - 1); }
+
+// ===== 알림톡 발송 (솔라피) =====
+// 자격정보는 코드에 두지 않는다 — 이 파일은 공개 git 저장소에 있다.
+// Apps Script 편집기 > 프로젝트 설정 > 스크립트 속성에 아래를 입력할 것:
+//   ALIMTALK_MODE        off(기본) | dryrun | live
+//   SOLAPI_API_KEY / SOLAPI_API_SECRET / SOLAPI_PFID
+//   SOLAPI_FROM          등록된 발신번호. 있으면 실패 시 SMS 대체발송이 켜진다.
+//   ALIMTALK_TEMPLATE_ID 비우면 아래 기본값
+//   ALIMTALK_VARS        (선택) 템플릿 변수명이 시트와 다를 때 {"템플릿변수명":"시트변수명"} JSON
+//   ALIMTALK_BUTTONS     (선택) 버튼 있는 템플릿일 때 buttons 배열 JSON. #{변수}는 치환된다.
+var ALIMTALK_TEMPLATE_ID_DEFAULT = 'KA01TP260729122036851D60q6GbitfA';
+var SOLAPI_SEND_URL = 'https://api.solapi.com/messages/v4/send-many/detail';
+
+// 상태 컬럼 위치(1-based). HEADERS 뒤쪽 5개와 순서가 같아야 한다.
+var COL_AT_STATUS = 15, COL_AT_TIME = 16, COL_AT_TRIES = 17, COL_AT_ERROR = 18, COL_AT_MSGID = 19;
+var AT_MAX_TRIES = 3;
+var AT_RETRY_BATCH = 20;   // 한 번에 처리할 행 수. 락 보유시간을 짧게 유지한다.
+
+function props_(){ return PropertiesService.getScriptProperties(); }
+function prop_(k, d){ var v = props_().getProperty(k); return (v === null || v === '') ? (d || '') : v; }
+
+/** 시트 행 → 템플릿 변수. 솔라피는 키에 #{}가 있어야 치환한다(없으면 1057 실패). */
+function alimtalkVars_(row){
+  var base = {
+    '닉네임'        : row[2],
+    '추천링크'      : row[9],
+    '프로모션명'    : row[10],
+    '기간'          : row[11],
+    '발표일'        : row[12],
+    '맛집리스트링크': row[13]
+  };
+  var override = prop_('ALIMTALK_VARS', '');
+  if(override){
+    try {
+      var map = JSON.parse(override), out = {};
+      for(var k in map){ out[k] = (base[map[k]] !== undefined) ? base[map[k]] : map[k]; }
+      base = out;
+    } catch(e){ /* JSON이 깨졌으면 기본 매핑을 쓴다 */ }
+  }
+  var vars = {};
+  for(var name in base){ vars['#{' + name + '}'] = String(base[name] == null ? '' : base[name]); }
+  return vars;
+}
+
+/** 솔라피 인증 헤더. date/salt/signature는 매 요청 새로 만든다(재사용하면 DuplicatedSignature). */
+function solapiAuthHeader_(apiKey, apiSecret){
+  var date = new Date().toISOString();
+  var salt = '';
+  for(var i=0;i<64;i++){ salt += Math.floor(Math.random()*16).toString(16); }
+  var raw = Utilities.computeHmacSha256Signature(date + salt, apiSecret);
+  var sig = raw.reduce(function(str, chr){
+    chr = (chr < 0 ? chr + 256 : chr).toString(16);   // Apps Script는 부호 있는 byte를 준다
+    return str + (chr.length === 1 ? '0' : '') + chr; // 0 패딩을 빼면 SignatureDoesNotMatch
+  }, '');
+  return 'HMAC-SHA256 apiKey=' + apiKey + ', date=' + date + ', salt=' + salt + ', signature=' + sig;
+}
+
+/** 예외를 던지지 않고 {ok, messageId, error}를 돌려준다. */
+function solapiSend_(to, vars){
+  var mode = prop_('ALIMTALK_MODE', 'off');
+  if(mode === 'off') return { ok:false, messageId:'', error:'미설정: ALIMTALK_MODE=off' };
+  if(mode === 'dryrun'){
+    Logger.log('[알림톡 DRYRUN] to=' + to + ' vars=' + JSON.stringify(vars));
+    return { ok:true, messageId:'DRYRUN', error:'' };
+  }
+
+  var key = prop_('SOLAPI_API_KEY'), secret = prop_('SOLAPI_API_SECRET'), pfId = prop_('SOLAPI_PFID');
+  if(!key || !secret || !pfId) return { ok:false, messageId:'', error:'미설정: API_KEY/SECRET/PFID 중 빠진 값이 있음' };
+
+  var from = prop_('SOLAPI_FROM');
+  var kakao = {
+    pfId: pfId,
+    templateId: prop_('ALIMTALK_TEMPLATE_ID', ALIMTALK_TEMPLATE_ID_DEFAULT),
+    variables: vars,
+    disableSms: from ? false : true   // 대체발송은 등록된 발신번호가 있을 때만 가능
+  };
+
+  var btnJson = prop_('ALIMTALK_BUTTONS', '');
+  if(btnJson){
+    try {
+      var filled = btnJson;
+      for(var vk in vars){ filled = filled.split(vk).join(vars[vk]); }
+      kakao.buttons = JSON.parse(filled);
+    } catch(e){ return { ok:false, messageId:'', error:'ALIMTALK_BUTTONS JSON 오류' }; }
+  }
+
+  var msg = { to: to, kakaoOptions: kakao };
+  if(from) msg.from = from;
+
+  var res;
+  try {
+    res = UrlFetchApp.fetch(SOLAPI_SEND_URL, {
+      method:'post', contentType:'application/json',
+      payload: JSON.stringify({ messages: [msg] }),
+      headers: { Authorization: solapiAuthHeader_(key, secret) },
+      muteHttpExceptions: true    // 4xx 본문의 실제 사유를 읽으려면 필요
+    });
+  } catch(err){ return { ok:false, messageId:'', error:'네트워크: ' + err }; }
+
+  var code = res.getResponseCode(), body = {};
+  try { body = JSON.parse(res.getContentText()) || {}; } catch(e){}
+  if(code >= 400){
+    return { ok:false, messageId:'', error: code + ' ' + (body.errorCode||'') + ' ' + (body.errorMessage || res.getContentText().slice(0,120)) };
+  }
+  var failed = body.failedMessageList || [];
+  if(failed.length){
+    return { ok:false, messageId:'', error:'접수실패 ' + failed[0].statusCode + ' ' + failed[0].statusMessage };
+  }
+  return { ok:true, messageId: (body.groupInfo && body.groupInfo.groupId) || '', error:'' };
+}
+
+/** 한 행을 발송하고 상태 컬럼을 기록한다. */
+function sendAlimtalkRow_(sh, rowIndex, row){
+  var to = String(row[3] || '').replace(/[^0-9]/g, '');
+  if(!to) return;
+  var r = solapiSend_(to, alimtalkVars_(row));
+  // 설정 전이면 행을 PENDING 그대로 두고 아무것도 쓰지 않는다.
+  // 시도 횟수도 올리지 않으므로, 나중에 설정을 켜면 그대로 재시도 대상으로 남는다.
+  if(!r.ok && r.error.indexOf('미설정:') === 0) return;
+
+  var tries = Number(sh.getRange(rowIndex, COL_AT_TRIES).getValue() || 0) + 1;
+  var status = r.ok ? 'SENT' : (tries >= AT_MAX_TRIES ? 'FAILED' : 'RETRY');
+  // 5칸을 한 번에 쓴다. 칸마다 setValue 하면 제출 응답이 그만큼 느려진다.
+  sh.getRange(rowIndex, COL_AT_STATUS, 1, 5)
+    .setValues([[ status, new Date(), tries, r.error || '', r.messageId || '' ]]);
+}
+
+/** 미발송분 재시도. 편집기에서 직접 실행하거나 시간 기반 트리거(5분)에 걸어 쓴다. */
+function retryPendingAlimtalk(){
+  var lock = LockService.getScriptLock();
+  if(!lock.tryLock(0)) return;   // 이전 회차나 제출이 돌고 있으면 이번 회차는 건너뛴다
+  try {
+    var sh = sheet_(ENTRIES), data = sh.getDataRange().getValues(), done = 0;
+    for(var i=1;i<data.length && done<AT_RETRY_BATCH;i++){
+      var st = String(data[i][COL_AT_STATUS-1] || '');
+      if(st !== 'PENDING' && st !== 'RETRY') continue;   // 빈칸(기존 참여자)은 건드리지 않는다
+      sh.getRange(i+1, COL_AT_STATUS).setValue('SENDING');
+      SpreadsheetApp.flush();    // 중간에 죽어도 같은 행을 두 번 보내지 않게 먼저 확정
+      sendAlimtalkRow_(sh, i+1, data[i]);
+      done++;
+    }
+  } finally { lock.releaseLock(); }
+}
+
+/** 편집기에서 한 번 실행 — entries 시트에 상태 컬럼(O~S) 헤더를 만든다. */
+function setupAlimtalkColumns(){
+  var sh = sheet_(ENTRIES);
+  var need = HEADERS.length - sh.getMaxColumns();
+  if(need > 0) sh.insertColumnsAfter(sh.getMaxColumns(), need);
+  ensureAlimtalkHeaders_(sh, sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]);
+}
+
+/** 편집기에서 실행 — 설정이 맞는지 내 번호로 1건 보내본다. 인자에 '010...' 을 넣어 호출. */
+function testAlimtalk(to){
+  var vars = alimtalkVars_(['','', '테스트', to || '', '', '', '', new Date(), false,
+                            BASE_LINK + '?ref=TEST01', PROMO_NAME, PROMO_PERIOD, PROMO_ANNOUNCE, FOODLIST_LINK]);
+  var r = solapiSend_(String(to || '').replace(/[^0-9]/g,''), vars);
+  Logger.log(JSON.stringify(r));
+  return r;
+}
 
 function logClick_(ref, cookie, ua){
   if(!ref) return;
